@@ -1,0 +1,91 @@
+{  
+    "key":"mainGroup",
+    "controlType":"formGroup",
+    "label":"Todas",
+    "isRoot":true,
+    "controls":[  
+       {  
+          "key":"grupoBasic",
+          "controlType":"formGroup",
+          "label":"Suas Informações",
+          "controls":[  
+             {  
+                "value":"TESTE UNINTER",
+                "key":"firstName",
+                "label":"Nome",
+                "required":true,
+                "order":1,
+                "controlType":"textbox",
+                "type":"",
+                "readonly":false,
+                "focus":"testeFunction()",
+                "validations":[  
+                   {  
+                      "key":"required",
+                      "type":"required",
+                      "options":{  
+                         "text":"O campo de nome é obrigatorio"
+                      }
+                   },
+                      {  
+                         "key":"validateGroupCourse",
+                         "type":"custom",
+                         "options":{  
+                         "text":"O campo de curso precisa de pelo menos 4 caracteres",
+                         "condition":"form.parent.parent.controls['groupCourse'].get('course').value.length > 3"
+                      }
+                   }
+                ]
+             },
+             {  
+                "key":"cpf",
+                "label":"Cpf",
+                "required":true,
+                "order":2,
+                "controlType":"textbox",
+                "type":"text",
+                "mask":"000.000.000-00",
+                "placeholder":"000.000.000-00"
+             },
+             {  
+                "key":"checkbox_teste",
+                "label":"Checkbox Teste",
+                "required":true,
+                "order":3,
+                "controlType":"checkbox",
+                "type":"checkbox",
+                "buttons":[  
+                   {  
+                      "id":"id_1",
+                      "value":1
+                   },
+                   {  
+                      "id":"id_2",
+                      "value":1
+                   }
+                ]
+             },
+             {  
+                "key":"email",
+                "label":"Email",
+                "required":true,
+                "order":3,
+                "controlType":"textbox",
+                "type":"text",
+                "placeholder":"Email"
+             },
+             {  
+                "key":"cellphone",
+                "label":"Celular",
+                "required":true,
+                "order":2,
+                "controlType":"textbox",
+                "type":"text",
+                "mask":"(00) 00000-0000",
+                "placeholder":"(00) 00000-0000"
+             }
+          ]
+ 
+       }
+    ]
+}

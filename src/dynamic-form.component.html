@@ -1,0 +1,76 @@
+<ng-container [formGroup]="formFields" *ngIf="this.getHiddenCondition()" >
+  <label *ngIf="inputField.label" [attr.for]="inputField.key">{{inputField.label}}</label>
+
+  <ng-container [ngSwitch]="inputField.controlType" >
+    <h1 *ngSwitchCase="'h1'" [class]="inputField.class" [id]="inputField.key">
+      {{formFields.controls[inputField.key].value}}
+    </h1>
+
+    <span *ngSwitchCase="'span'" [class]="inputField.class" [id]="inputField.key">
+      {{formFields.controls[inputField.key].value}}
+    </span>
+
+    <strong *ngSwitchCase="'strong'" [class]="inputField.class" [id]="inputField.key">
+      {{formFields.controls[inputField.key].value}}
+    </strong>
+
+    <a *ngSwitchCase="'anchor'" [id]="inputField.key" [class]="inputField.class" [attr.data-toggle]="inputField.dataToggle" [href]="inputField.href"
+      [attr.role]="inputField.button" [attr.aria-expanded]="inputField.ariaExpanded" [attr.aria-controls]="inputField.ariaControls">
+      {{inputField.value}}
+    </a>
+
+    <button *ngSwitchCase="'button'" [id]="inputField.key" [class]="inputField.class" (click)="clickFunction()">
+      {{inputField.value}}
+    </button>
+    <!--INPUT / TEXTBOX / NUMBER / BUTTON / PASSWORD-->
+    <!-- [hidden]="inputField.key" -->
+    <input *ngSwitchCase="'textbox'" class="form-control" [formControlName]="inputField.key" [id]="inputField.key" (blur)="blurFunction()"
+      [type]="inputField.type" [mask]="inputField.mask" [readonly]="inputField.readonly" [placeholder]="inputField.placeholder != null && inputField.placeholder != 'undefined' ? inputField.placeholder : ''"
+      (focus)="inputField.focus" #control>
+ 
+    <!--DROPDOWN-->
+    <select [id]="inputField.key" *ngSwitchCase="'dropdown'" [formControlName]="inputField.key" [class]="inputField.class" (change)="changeFunction();"
+      #control>
+      <option *ngFor="let opt of inputField.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+    <!--TEXTAREA-->
+    <textarea *ngSwitchCase="'textarea'" [placeholder]="inputField.placeholder" class="form-control" [formControlName]="inputField.key"
+      [id]="inputField.key"></textarea>
+
+    <!--RADIOBUTTON-->
+    <div *ngSwitchCase="'radioButton'">
+      <label [attr.for]="button.id" *ngFor="let button of inputField.buttons">
+        <input [id]="button.id" [value]='button.value' type="radio" [formControlName]="inputField.key"> {{button.label}}
+      </label>
+    </div>
+
+    <div *ngSwitchCase="'checkbox'">
+      <label [attr.for]="button.id" *ngFor="let button of inputField.buttons">
+        <input [id]="button.id" [value]='button.value' type="checkbox" [formControlName]="inputField.key" /> {{button.label}}
+      </label>
+    </div>
+
+    <!--IMG-->
+    <img *ngSwitchCase="'img'" [id]="inputField.key" [src]="inputField.src">
+    <div *ngSwitchCase="'formGroup'" [class]="inputField.class" [id]="inputField.key">
+      <div *ngFor="let inputInside of inputs" app-dynamic-form [inputField]="inputInside" [parentInputField]="inputField" [rootInputFields]="rootInputFields"
+        [formFields]="childForm" [class]="inputInside.externalDivClass"></div>
+    </div>
+
+
+    <!--CHECKBOX - Complicado por causa do FormArray-->
+    <!-- <div *ngSwitchCase="'checkbox'">
+      <label [attr.for]="button.id" *ngFor="let button of inputField.buttons">
+        <input [id]="button.id" [value]='button.value' type="checkbox" [formControlName]="inputField.key" />
+        {{button.label}}
+      </label>
+    </div> -->
+    <!-- (change)="salvaCk($event, inputField.key, button.value)" -->
+
+  </ng-container>
+
+  <div *ngFor="let error of this.getValidationErrors()">
+    <div *ngIf="this.isTouched">{{error.text}}</div>
+    <!-- <div>{{error.text}}</div> -->
+  </div>
+</ng-container>

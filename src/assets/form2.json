@@ -1,0 +1,423 @@
+{  
+    "key":"mainGroup",
+    "controlType":"formGroup",
+    "label":"Todas",
+    "isRoot":true,
+    "controls":[  
+       {  
+          "key":"formex",
+          
+          "controlType":"formGroup",
+          "label":"",
+          "className": "jumbotron jumbotron-fluid",
+          "controls":[
+             {
+                "key":"currentForm",
+                "controlType":"formGroup",
+                "label":"",
+                "className": "max-width-jumboItems",
+                "switchClass": "o-hidden",
+                "controls":[
+                {  
+                   "key":"span0",
+                   "value":"Curso Selecionado:",
+                   "className": "",
+                   "controlType":"span",
+                   "externalDivClass": "jumbotron-heading selectedCourseSpan"
+                },  
+             {  
+                "key":"h1Title",
+                "value":"Gestão da Produção Industrial",
+                "className": "lead",
+                "inlineStyle": "",
+                "controlType":"h1",
+                "label": "",
+                "hiddenCondition": "this.formFields.controls[this.inputField.key].disabled"
+             },
+             {  
+                "key":"span1",
+                "value":"",
+                "className": "fa fa-chevron-right chevron-amarelo",
+                "controlType":"span",
+                "externalDivClass": "d-inline-block"
+             },
+             {  
+                "key":"span2",
+                "value":"Modalidade",
+                "className": "",
+                "controlType":"span",
+                "externalDivClass": "d-inline-block"
+             },
+             {  
+                "key":"span3",
+                "value":"",
+                "className": "fa fa-chevron-right chevron-amarelo",
+                "controlType":"span",
+                "externalDivClass": "d-inline-block ml-2"
+             },
+             {  
+                "key":"span4",
+                "value":"Duração 5 anos",
+                "className": "",
+                "controlType":"span",
+                "externalDivClass": "d-inline-block"
+             },
+             {  
+                "key":"btnSet",
+                "value":"Test",
+                "className": "",
+                "controlType":"button",
+                "externalDivClass": "d-inline-block",
+                "clickEvent": "if(!this.formFields.controls['h1Title'].disabled) { this.formFields.controls['h1Title'].disable(); this.formFields.controls['h1Title'].setValue('Pedrinho'); } else { this.formFields.controls['h1Title'].enable(); }"
+             },
+             {  
+                "key":"span5",
+                "value":"",
+                "className": "fa fa-chevron-right chevron-amarelo",
+                "controlType":"span",
+                "externalDivClass": "d-inline-block ml-2"
+             },
+             {  
+                "key":"span6",
+                "value":"Nota Avaliação MEC",
+                "className": "",
+                "controlType":"span",
+                "externalDivClass": "d-inline-block"
+             },
+             {  
+                "key":"strong7",
+                "value":"5",
+                "className": "nota-mec",
+                "controlType":"strong",
+                "externalDivClass": "m-2 d-inline-block"
+             },
+             {  
+                "key":"span8",
+                "value":"",
+                "className": "fa fa-certificate chevron-azul",
+                "controlType":"span",
+                "externalDivClass": "d-inline-block"
+             },
+             {  
+                "key":"span9",
+                "value":"Curso babab",
+                "className": "",
+                "controlType":"span",
+                "externalDivClass": "m-2 d-inline-block"
+             }]
+             },
+             {  
+                "key":"button1",
+                "value":"Mudar de Curso",
+                "className": "btn btn-outline-info",
+                "controlType":"anchor",
+                "dataToggle":"collapse",
+                "href":"#collapseExample",
+                "role":"button",
+                "ariaExpanded":"false",
+                "ariaControls":"collapseExample",
+                "externalDivClass": "m-2 d-inline-block"
+             },
+             {
+                "key":"collapseExample",
+                "controlType":"formGroup",
+                "label":"",
+                "className": "collapse bg-white row",
+                "controls":[
+                { 
+                "key":"course",
+                "value":"",
+                "className": "custom-select d-block w-100",
+                "controlType":"dropdown",
+                "label": "Curso",
+                "externalDivClass": "col-md-12 mb-3",
+                "validations":[  
+                   {  
+                      "key":"required",
+                      "type":"required",
+                      "options":{  
+                         "text":"O campo de curso é obrigatorio"
+                      }
+                   }]
+                },
+                { 
+                "key":"courseLevel",
+                "value":"1",
+                "className": "custom-select d-block w-100",
+                "controlType":"dropdown",
+                "label": "Nível de Curso",
+                "externalDivClass": "col-md-4",
+                "load":
+                   {  
+                         "apiUrl":"https://fichaapidev.uninter.com/v1/nivel",
+                         "method":"GET",
+                         "token":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkZpY2hhQ2xvdWQiLCJzaWQiOiI2MDNhYzZjMC0xYmVhLTQ1MmEtOTllYi01ZmM1M2E5Mjk0MzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiMDEwYzJlZTktNjRkNy00ZWRkLWJmMTctNDc4MTU0Y2FlOWI3IiwiaWF0IjoxNTQ3NzMzMTA4LCJuYmYiOjE1NDc3MzMxMDgsImV4cCI6MTg2MzA5MzEwOCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.lO1tNCOb7kW_fVShHBLndrn3KbC3-U4irnDOBCR3afI",
+                         "idField":"id",
+                         "valueField":"nome"
+                   }  
+                },
+                { 
+                "key":"courseModality",
+                "value":"2",
+                "className": "custom-select d-block w-100",
+                "controlType":"dropdown",
+                "label": "Modalidade",
+                "externalDivClass": "col-md-4",
+                 "options":[  
+                   {  
+                      "key":"",
+                      "value":"Selecione"
+                   }
+                ],
+                   "load":
+                   {  
+                         "apiUrl":"https://fichaapidev.uninter.com/v1/modalidade",
+                         "method":"GET",
+                         "token":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkZpY2hhQ2xvdWQiLCJzaWQiOiI2MDNhYzZjMC0xYmVhLTQ1MmEtOTllYi01ZmM1M2E5Mjk0MzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiMDEwYzJlZTktNjRkNy00ZWRkLWJmMTctNDc4MTU0Y2FlOWI3IiwiaWF0IjoxNTQ3NzMzMTA4LCJuYmYiOjE1NDc3MzMxMDgsImV4cCI6MTg2MzA5MzEwOCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.lO1tNCOb7kW_fVShHBLndrn3KbC3-U4irnDOBCR3afI",
+                         "idField":"id",
+                         "valueField":"nome"
+                   } 
+                },
+ 
+             { 
+                "key":"courseShift",
+                "value":"0",
+                "className": "custom-select d-block w-100",
+                "controlType":"dropdown",
+                "label": "Turno",
+                "load":
+                   {  
+                         "apiUrl":"https://fichaapidev.uninter.com/v1/turno",
+                         "method":"GET",
+                         "token":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkZpY2hhQ2xvdWQiLCJzaWQiOiI2MDNhYzZjMC0xYmVhLTQ1MmEtOTllYi01ZmM1M2E5Mjk0MzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiMDEwYzJlZTktNjRkNy00ZWRkLWJmMTctNDc4MTU0Y2FlOWI3IiwiaWF0IjoxNTQ3NzMzMTA4LCJuYmYiOjE1NDc3MzMxMDgsImV4cCI6MTg2MzA5MzEwOCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.lO1tNCOb7kW_fVShHBLndrn3KbC3-U4irnDOBCR3afI",
+                         "idField":"id",
+                         "valueField":"nome"
+                   },
+                   "hiddenCondition" : "this.formFields.controls['courseModality'].value == 3",
+                   "changeEvent": "this.jsonFormLoader.loadFields('context.parentInputField.controls[0]', 'https://fichaapidev.uninter.com/v1/curso/${args[0]}/${args[1]}/${args[2]}', 'GET', { 'idField': 'cdCurso', 'valueField': 'nome' }, 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkZpY2hhQ2xvdWQiLCJzaWQiOiI2MDNhYzZjMC0xYmVhLTQ1MmEtOTllYi01ZmM1M2E5Mjk0MzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiMDEwYzJlZTktNjRkNy00ZWRkLWJmMTctNDc4MTU0Y2FlOWI3IiwiaWF0IjoxNTQ3NzMzMTA4LCJuYmYiOjE1NDc3MzMxMDgsImV4cCI6MTg2MzA5MzEwOCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.lO1tNCOb7kW_fVShHBLndrn3KbC3-U4irnDOBCR3afI', ['context.formFields.controls[\"courseLevel\"].value','context.formFields.controls[\"courseModality\"].value', 'context.formFields.controls[\"courseShift\"].value'], this, '.data')" 
+                },
+ 
+ 
+ 
+                {  
+                "key":"buttonAlternate",
+                "value":"Alterar",
+                "className": "btn btn-outline-info float-right",
+                "controlType":"button",
+                "externalDivClass": "col-md-12 my-2",
+                "clickEvent" : "this.jsonFormLoader.validateInnerControls(this.formFields);#;#if(this.formFields.valid) {this.jsonFormLoader.sendData('http://localhost:62956/api/curso/alterar', 'PUT', {},'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M', {cdCurso: 'context.formFields.controls[\"course\"].value', cdNivelCurso: 'context.formFields.controls[\"courseLevel\"].value', cdModalidade: 'context.formFields.controls[\"courseModality\"].value', cdTurno: 'context.formFields.controls[\"courseShift\"].value'}, this);}"
+             }]
+             }
+ 
+ 
+             ]
+ 
+       },
+       {  
+          "key":"groupAddress",
+          "controlType":"formGroup",
+          "label":"Informe seu Endereço",
+          "controls":[  
+             {  
+                "key":"address",
+                "order":1,
+                "controlType":"address",
+                "type":"address"
+             }
+          ]
+       },
+       {  
+          "key":"groupCourse",
+          "controlType":"formGroup",
+          "label":"Escolha seu Curso",
+          "controls":[  
+             {  
+                "key":"city",
+                "label":"Cidade",
+                "required":true,
+                "order":1,
+                "value": "4110",
+                "controlType":"dropdown",
+                "options":[  
+                   {  
+                      "key":"",
+                      "value":"Selecione"
+                   }
+                ]
+             },
+             {  
+                      "key":"state5",
+                      "label":"Estado",
+                      "required":true,
+                      "value": "PR",
+                      "order":1,
+                      "controlType":"dropdown",
+                      "options":[  
+                         {  
+                            "key":"",
+                            "value":"Selecione"
+                         },
+                         {  
+                            "key":"1",
+                            "value":"Graduação"
+                         }
+                      ],
+                      "load":{  
+                         "apiUrl":"http://localhost:62956/api/estado/regiao/1",
+                         "method":"GET",
+                         "token":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M",
+                         "idField":"cdEstado",
+                         "valueField":"nome",
+                         "contentLevel":""
+                      },
+                      "changeEvent": "this.jsonFormLoader.loadFields('context.rootInputFields.controls[2].controls[0]', 'http://localhost:62956/api/cidade/estado/${args[0]}/pais/BR', 'GET', { 'idField': 'cdCidade', 'valueField': 'nome' }, 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M', ['context.formFields.controls[context.inputField.key].value'], this, ' ')"
+                   },
+                               {  
+                "key":"regiao",
+                "label":"Regiao",
+                "required":true,
+                "order":3,
+                "controlType":"dropdown",
+                "options":[],
+                "load":{  
+                         "apiUrl":"http://localhost:62956/api/estado/regiao",
+                         "method":"GET",
+                         "token":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M",
+                         "idField":"cdRegiao",
+                         "valueField":"nome",
+                         "contentLevel":""
+                      },
+                "changeEvent": "this.jsonFormLoader.loadFields('context.rootInputFields.controls[2].controls[1]', 'http://localhost:62956/api/estado/regiao/${args[0]}', 'GET', { 'idField': 'cdEstado', 'valueField': 'nome' }, 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M', ['context.formFields.controls[context.inputField.key].value'], this, ' ', 'that.fireEvent(`change`, `state5`)')"
+ 
+             },
+ 
+             {  
+                "key":"modality",
+                "label":"Modalidade",
+                "required":false,
+                "order":2,
+                "controlType":"dropdown",
+                "options":[  
+                   {  
+                      "key":"",
+                      "value":"Selecione"
+                   },
+                   {  
+                      "key":"solid",
+                      "value":"Solid"
+                   },
+                   {  
+                      "key":"great",
+                      "value":"Great"
+                   },
+                   {  
+                      "key":"good",
+                      "value":"Good"
+                   },
+                   {  
+                      "key":"unproven",
+                      "value":"Unproven"
+                   }
+                ]
+             },
+             {  
+                "key":"turn",
+                "label":"Turno",
+                "required":false,
+                "order":3,
+                "controlType":"dropdown",
+                "options":[  
+                   {  
+                      "key":"",
+                      "value":"Selecione"
+                   },
+                   {  
+                      "key":"solid",
+                      "value":"Solid"
+                   },
+                   {  
+                      "key":"great",
+                      "value":"Great"
+                   },
+                   {  
+                      "key":"good",
+                      "value":"Good"
+                   },
+                   {  
+                      "key":"unproven",
+                      "value":"Unproven"
+                   }
+                ]
+             },
+             {  
+                "key":"course",
+                "label":"Curso",
+                "required":true,
+                "order":4,
+                "controlType":"textbox",
+                "type":"text",
+                "value": "PR",
+                "placeholder":"Escolha seu curso",
+                "dependentControls": [
+                   {
+                      "name": "grupoBasic.firstName"
+                   }],
+                   "validations":[  
+                   {  
+                      "key":"stateInUse",
+                      "type":"async",
+                      "apiUrl": "http://localhost:62956/api/estado/validarEstado/",
+                      "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RlbWFzSW50ZXJub3MiLCJzaWQiOiJjMzQxZWFkNy03MzE2LTRmY2EtOTI0MS00ZjQ3NjNiMGYzYjIiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiNTY1ZTUxMmYtZGM1YS00ZTJjLWIwZDctM2QzYTllYjk1ZjE1IiwiaWF0IjoxNTQ4MDg4NTg2LCJuYmYiOjE1NDgwODg1ODYsImV4cCI6MTg2MzQ0ODU4NiwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.nTXgrB8RMQkXrTvsWrR-PQepwVbBkR-_xcM-xUg73Sc",
+                      "options":{  
+                         "text":"O campo foi invalidado"
+                      }
+                   }]
+             }
+          ]
+       },
+       {  
+          "key":"groupWhereToStudy",
+          "controlType":"formGroup",
+          "label":"Escolha onde Estudar",
+          "controls":[  
+             {  
+                "key":"city",
+                "label":"Cidade",
+                "required":true,
+                "order":2,
+                "controlType":"dropdown",
+                "options":[  
+                ]
+             },
+ 
+             {  
+                "key":"poloAddress",
+                "label":"Endereço do Polo",
+                "required":true,
+                "order":4,
+                "controlType":"textbox",
+                "type":"text",
+                "placeholder":"Selecione um Polo",
+                   "validations":[  
+                   {  
+                      "key":"cityInUse",
+                      "type":"async",
+                      "apiUrl": "http://localhost:62956/api/estado/validarCidade/",
+                      "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RlbWFzSW50ZXJub3MiLCJzaWQiOiJjMzQxZWFkNy03MzE2LTRmY2EtOTI0MS00ZjQ3NjNiMGYzYjIiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiNTY1ZTUxMmYtZGM1YS00ZTJjLWIwZDctM2QzYTllYjk1ZjE1IiwiaWF0IjoxNTQ4MDg4NTg2LCJuYmYiOjE1NDgwODg1ODYsImV4cCI6MTg2MzQ0ODU4NiwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.nTXgrB8RMQkXrTvsWrR-PQepwVbBkR-_xcM-xUg73Sc",
+                      "options":{  
+                         "text":"O campo foi invalidado"
+                      }
+                   }]
+             },
+             {  
+                "key":"subgroup",
+                "controlType":"formGroup",
+                "label":"subgroup",
+                "controls":[  
+                   
+                ]
+             }
+          ]
+       }
+    ]
+ }
