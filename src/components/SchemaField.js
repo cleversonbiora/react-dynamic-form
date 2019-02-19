@@ -1,54 +1,66 @@
 import React, { Component } from 'react';
+import BaseInput from './BaseInput';
+import { onChangeValue } from '../actions';
 
 class SchemaField extends Component {
   render() {
     const {
-        label,
+        type,
         controls,
-        controlType,
         value,
         options,
-        className
-    } = this.props.form;
-    switch(controlType){
-        case 'formGroup':
+        ...inputProps
+    } = this.props;
+    switch(type){
+        case 'button':
+        case 'checkbox':
+        case 'color':
+        case 'date':
+        case 'datetime-local':
+        case 'email ':
+        case 'file':
+        case 'hidden':
+        case 'image':
+        case 'month ':
+        case 'number ':
+        case 'password':
+        case 'radio':
+        case 'range':
+        case 'reset':
+        case 'search':
+        case 'submit':
+        case 'tel':
+        case 'text':
+        case 'time':
+        case 'url':
+        case 'week':
             return (
-                <div className={className}>
-                    {label}
+                <BaseInput type={type} value={value} {...inputProps} />
+            );
+        case 'select':
+        case 'datalist':
+            const CustomList = `${type}`;
+            return (
+                <CustomList {...inputProps}>
+                        {options ? (options.map(option => <option key={option.value} value={option.value}>{option.label ? option.label : option.value}</option>)):(<option value="">Selecione</option>)}
+                </CustomList>
+            );
+        case 'fragment':
+            return (
+                <React.Fragment>
+                    {value}
                     {controls ? 
-                    (controls.map(form => <SchemaField form={form} />)) :(<div></div>)}
-                </div>
-            );
-        case 'h1':
-            return (
-                <h1 className={className} >{value}</h1>
-            );
-        case 'span':
-            return (
-                <span className={className}>{value}</span>
-            );
-        case 'textbox':
-            return (
-                <React.Fragment>
-                    {label? (<label>{label}</label>):""}
-                    <textbox className={className}>{value}</textbox>
-                </React.Fragment>
-            );
-        case 'dropdown':
-            return (
-                <React.Fragment>
-                    {label? (<label>{label}</label>):""}
-                    <select className={className}>
-                        {options ? (options.map(option => <option value="">{option.value}</option>)):(<option value="">Selecione</option>)}
-                    </select>
+                    (controls.map(control => <SchemaField key={control.id} {...control} />)) :(null)}
                 </React.Fragment>
             );
         default:
+            const CustomTag = `${type}`;
             return (
-                <React.Fragment>
+                <CustomTag {...inputProps}>
+                    {value}
                     {controls ? 
-                    (controls.map(form => <SchemaField form={form} />)) :(<div></div>)}
-                </React.Fragment>
+                    (controls.map(control => <SchemaField key={control.id} {...control} />)) :(null)}
+                </CustomTag>
             );
     }
   }

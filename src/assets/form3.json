@@ -1,0 +1,74 @@
+{
+"id":"mainForm",
+"type":"form",
+"method":"get",
+"className":"form",
+"controls":[
+{  
+    "id":"mainGroup",
+    "type":"div",
+    "className":"row",
+    "controls":[{  
+        "id":"titleForm",
+        "type":"h1",
+        "value":"Formulario",
+        "className": "title"
+    },
+    {  
+        "id":"subtitleForm",
+        "type":"h2",
+        "value":"Formulario",
+        "className": "title"
+    },
+    {
+        "id":"paragraph",
+        "type":"p",
+        "value":"Descrição de um elemento."
+    },
+    {  
+        "id":"firstName",
+        "name":"firstName",
+        "type":"text",
+        "className": "form-control",
+        "value":"Cleverson"
+    },
+    {  
+        "id":"lastName",
+        "name":"lastName",
+        "type":"text"
+    },
+    {  
+        "id":"select1",
+        "name":"select1",
+        "type":"select",
+        "options":[  
+            {  
+               "value":"",
+               "label":"Selecione"
+            },
+            {  
+               "value":"solid",
+               "label":"Solid"
+            },
+            {  
+               "value":"great",
+               "label":"Great"
+            },
+            {  
+               "value":"good",
+               "label":"Good"
+            },
+            {  
+               "value":"unproven",
+               "label":"Unproven"
+            }
+         ]
+    },
+    {  
+        "id":"btnSubmit",
+        "type":"submit",
+        "value":"Enviar",
+        "className": "btn btn-default"
+    }]
+}]
+}

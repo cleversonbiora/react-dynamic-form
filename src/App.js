@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import formJson from './assets/form2.json';
+import formJson from './assets/form3.json';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateState } from './actions';
-import SchemaField from './components/SchemaField.js'
+import DynamicForm from './components/DynamicForm.js'
 
 class App extends Component {
 
@@ -15,9 +15,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-           {this.props.form.label}
-          {this.props.form.controls ? 
-            (this.props.form.controls.map(form => <SchemaField form={form} />)) :(<div></div>)}
+        <DynamicForm form={this.props.form}/>
       </div>
     );
   }
