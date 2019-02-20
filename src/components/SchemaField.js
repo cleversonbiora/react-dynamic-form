@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import BaseInput from './BaseInput';
-import { onChangeValue } from '../actions';
+import Value from './Value';
 
 class SchemaField extends Component {
-  render() {
-    const {
-        type,
-        controls,
-        value,
-        options,
-        ...inputProps
-    } = this.props;
+  isControlledComponent(type){
     switch(type){
         case 'button':
         case 'checkbox':
@@ -34,34 +27,73 @@ class SchemaField extends Component {
         case 'time':
         case 'url':
         case 'week':
-            return (
-                <BaseInput type={type} value={value} {...inputProps} />
-            );
         case 'select':
         case 'datalist':
-            const CustomList = `${type}`;
-            return (
-                <CustomList {...inputProps}>
-                        {options ? (options.map(option => <option key={option.value} value={option.value}>{option.label ? option.label : option.value}</option>)):(<option value="">Selecione</option>)}
-                </CustomList>
-            );
-        case 'fragment':
-            return (
-                <React.Fragment>
-                    {value}
-                    {controls ? 
-                    (controls.map(control => <SchemaField key={control.id} {...control} />)) :(null)}
-                </React.Fragment>
-            );
+        case 'textarea':
+            return true;
         default:
-            const CustomTag = `${type}`;
-            return (
-                <CustomTag {...inputProps}>
-                    {value}
-                    {controls ? 
-                    (controls.map(control => <SchemaField key={control.id} {...control} />)) :(null)}
-                </CustomTag>
-            );
+            return false;
+    }
+  }
+  isVoidElement(type){
+      switch(type){
+        case 'area':
+        case 'base':
+        case 'br':
+        case 'col':
+        case 'embed':
+        case 'hr':
+        case 'img':
+        case 'input':
+        case 'keygen':
+        case 'link':
+        case 'menuitem':
+        case 'meta':
+        case 'param':
+        case 'source':
+        case 'track':
+        case 'wbr':
+            return true;
+        default:
+            return false;
+      }
+  }
+  render() {
+    const {
+        type,
+        controls,
+        value,
+        ...inputProps
+    } = this.props;
+    if(this.isControlledComponent(type)){
+        return (
+            <BaseInput type={type} value={value} {...inputProps} />
+        );
+    }else if(this.isVoidElement(type)){
+        const CustomTag = `${type}`;
+        return (
+            <CustomTag {...inputProps} />
+        );
+    }else{
+        switch(type){
+            case 'fragment':
+                return (
+                    <React.Fragment>
+                        <Value value={value} />
+                        {controls ? 
+                        (controls.map(control => <SchemaField key={control.id} {...control} />)) :(null)}
+                    </React.Fragment>
+                );
+            default:
+                const CustomTag = `${type}`;
+                return (
+                    <CustomTag {...inputProps}>
+                        <Value value={value} />
+                        {controls ? 
+                        (controls.map(control => <SchemaField key={control.id} {...control} />)) :(null)}
+                    </CustomTag>
+                );
+            }
     }
   }
 }

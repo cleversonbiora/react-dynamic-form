@@ -14,6 +14,11 @@
         "value":"Formulario",
         "className": "title"
     },
+    {
+        "type":"p",
+        "style":{"color":"red"},
+        "value":"Hello, {firstName} {lastName}"
+    },
     {  
         "id":"subtitleForm",
         "type":"h2",
@@ -29,22 +34,50 @@
         "type":"fragment",
         "value":"Texto solto."
     },
+    {
+        "type":"img",
+        "src":"/img/tt.jpg"
+    },
     {  
         "id":"firstName",
         "name":"firstName",
         "type":"text",
         "className": "form-control",
-        "value":"Cleverson"
+        "value":"Cleverson",
+        "required":"true"
+    },
+    {
+        "type":"br"
     },
     {  
         "id":"lastName",
         "name":"lastName",
-        "type":"text"
+        "type":"text",
+        "placeholder":"Escolha seu curso"
+    },
+    {  
+        "id":"description",
+        "name":"description",
+        "type":"textarea",
+        "value":"Texto Area"
+    },
+    {  
+        "id":"radio1",
+        "name":"radio",
+        "type":"radio",
+        "value":"1"
+    },
+    {  
+        "id":"radio2",
+        "name":"radio",
+        "type":"radio",
+        "value":"2"
     },
     {  
         "id":"select1",
         "name":"select1",
         "type":"select",
+        "value":"good",
         "options":[  
             {  
                "value":"",
@@ -67,6 +100,30 @@
                "label":"Unproven"
             }
          ]
+    },
+    {  
+        "id":"select2",
+        "name":"select2",
+        "type":"select",
+        "value":"2",
+        "options":[  
+            {  
+               "value":"",
+               "label":"Selecione"
+            }
+         ],
+         "load":{  
+                  "apiUrl":"https://integracaobancariaapi.uninter.com/v1/banco",
+                  "method":"GET",
+                  "headers":{
+                        "Content-Type":"application/json",
+                        "X-Custom-Header": "ProcessThisImmediately",
+                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M"
+                  },
+                  "valueField":"id",
+                  "labelField":"nome",
+                  "root":"data"
+        }
     },
     {  
         "id":"btnSubmit",

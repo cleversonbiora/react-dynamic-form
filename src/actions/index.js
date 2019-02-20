@@ -1,8 +1,8 @@
 import { CHANGE_VALUE, UPDATE_STATE, ADD_VALUE } from './actionTypes';
 
-export const onChangeValue = value => ({
+export const changeValue = value => ({
   type: CHANGE_VALUE,
-  texto: value
+  payload: value
 });
 export const addValue = value => ({
   type: ADD_VALUE,
