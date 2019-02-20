@@ -25,6 +25,10 @@
         "type":"p",
         "value":"Descrição de um elemento."
     },
+    {
+        "type":"fragment",
+        "value":"Texto solto."
+    },
     {  
         "id":"firstName",
         "name":"firstName",

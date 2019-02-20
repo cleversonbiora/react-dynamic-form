@@ -1,6 +1,8 @@
 import { formReducer } from './formReducer';
+import { valueReducer } from './valueReducer';
 import { combineReducers } from 'redux';
 
 export const Reducers = combineReducers({
-  formState: formReducer
+  formState: formReducer,
+  valueState: valueReducer
 });
