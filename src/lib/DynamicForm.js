@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SchemaField  from './SchemaField';
+import SchemaField  from './components/SchemaField';
 
 class DynamicForm extends Component {
   render() {

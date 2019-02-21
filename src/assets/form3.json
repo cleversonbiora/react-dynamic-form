@@ -2,6 +2,8 @@
 "id":"mainForm",
 "type":"form",
 "method":"get",
+"async":true,
+"action":"https://integracaobancariaapi.uninter.com/v1/banco",
 "className":"form",
 "controls":[
 {  

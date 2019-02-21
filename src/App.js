@@ -4,7 +4,7 @@ import formJson from './assets/form3.json';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateState} from './actions';
-import DynamicForm from './components/DynamicForm.js'
+import DynamicForm from './lib/DynamicForm'
 
 class App extends Component {
 

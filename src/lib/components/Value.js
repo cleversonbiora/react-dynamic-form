@@ -1,7 +1,7 @@
 import React,{Component} from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addValue, changeValue } from '../actions';
+import { addValue, changeValue } from '../../actions';
 
 class BaseInput extends Component {
     render() {

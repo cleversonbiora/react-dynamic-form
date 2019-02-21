@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BaseInput from './BaseInput';
+import BaseForm from './BaseForm';
 import Value from './Value';
 
 class SchemaField extends Component {
@@ -76,6 +77,13 @@ class SchemaField extends Component {
         );
     }else{
         switch(type){
+            case 'form':
+                return (
+                    <BaseForm {...inputProps}>
+                        {controls ? 
+                        (controls.map(control => <SchemaField key={control.id} {...control} />)) :(null)}
+                    </BaseForm>
+                );
             case 'fragment':
                 return (
                     <React.Fragment>
