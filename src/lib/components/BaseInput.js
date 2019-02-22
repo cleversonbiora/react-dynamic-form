@@ -1,13 +1,13 @@
 import React,{Component} from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addValue, changeValue } from '../../actions';
+import { addFormValue, changeFormValue } from '../actions';
 
 class BaseInput extends Component {
     constructor(props) {
         super(props);
         var payload = {key:this.props.id, value:(this.props.value ? this.props.value : "")};
-        props.addValue(payload);
+        props.addFormValue(payload);
         this.state = {
           optionsList: this.props.options,
       };
@@ -56,7 +56,7 @@ class BaseInput extends Component {
       } = this.props;
       inputProps.type = inputProps.type || "text";
       const _onChange = ({ target: { value } }) => {
-        return this.props.changeValue({key:this.props.id, value:value});
+        return this.props.changeFormValue({key:this.props.id, value:value});
       };
       switch(inputProps.type){
         case 'select':
@@ -105,9 +105,9 @@ BaseInput.defaultProps = {
   };
 
   const mapStateToProps = (store) => ({
-    values: store.valueState
+    values: store.dynamicFormState.valueState
   });
   
-  const mapDispatchToProps = dispatch => bindActionCreators({ addValue,changeValue }, dispatch);
+  const mapDispatchToProps = dispatch => bindActionCreators({ addFormValue,changeFormValue }, dispatch);
   
   export default connect(mapStateToProps, mapDispatchToProps)(BaseInput);

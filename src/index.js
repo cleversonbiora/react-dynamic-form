@@ -4,7 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import { Store } from './store';
+import { createStore } from 'redux';
+import { Reducers } from './lib';
+import { combineReducers } from 'redux';
+
+export const ReducersApp = combineReducers({
+  dynamicFormState: Reducers
+});
+export const Store = createStore(ReducersApp);
 
 ReactDOM.render(
     <Provider store={Store}>
