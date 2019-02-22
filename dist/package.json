@@ -1,0 +1,30 @@
+{
+  "name": "react-dynamic-form-alfa",
+  "version": "0.2.3",
+  "description": "A simple and small lib to render html form based in json.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cleversonbiora/react-dynamic-form.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "dynamic",
+    "dynamic-form",
+    "json"
+  ],
+  "author": "Cleverson Biora",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cleversonbiora/react-dynamic-form/issues"
+  },
+  "homepage": "https://github.com/cleversonbiora/react-dynamic-form#readme"
+}
