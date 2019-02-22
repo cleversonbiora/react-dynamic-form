@@ -1,7 +1,5 @@
 import React,{Component} from "react";
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { addValue, changeValue } from '../../actions';
 
 class BaseInput extends Component {
     render() {
@@ -38,9 +36,8 @@ class BaseInput extends Component {
 }
 
   const mapStateToProps = (store) => ({
-    values: store.valueState
+    values: store.dynamicFormState.valueState
   });
   
-  const mapDispatchToProps = dispatch => bindActionCreators({ addValue,changeValue }, dispatch);
   
-  export default connect(mapStateToProps, mapDispatchToProps)(BaseInput);
+  export default connect(mapStateToProps)(BaseInput);

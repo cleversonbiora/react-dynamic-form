@@ -1,7 +1,7 @@
 import React,{Component} from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addValue, changeValue } from '../../actions';
+import { changeFormValue } from '../actions';
 
 class BaseForm extends Component {
     render() {
@@ -23,7 +23,7 @@ class BaseForm extends Component {
                 fetch(action,{
                                 method: method || 'GET',
                                 headers: headers, 
-                                body: (`${method}`.toUpperCase() == 'GET' ? null : JSON.stringify(values))
+                                body: (`${method}`.toUpperCase() === 'GET' ? null : JSON.stringify(values))
                             })
                 .then(response => response.json())
                 .then(data => {
@@ -50,9 +50,9 @@ BaseForm.defaultProps = {
   };
 
   const mapStateToProps = (store) => ({
-    values: store.valueState
+    values: store.dynamicFormState.valueState
   });
   
-  const mapDispatchToProps = dispatch => bindActionCreators({ addValue,changeValue }, dispatch);
+  const mapDispatchToProps = dispatch => bindActionCreators({ changeFormValue }, dispatch);
   
   export default connect(mapStateToProps, mapDispatchToProps)(BaseForm);

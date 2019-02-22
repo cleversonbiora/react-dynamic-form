@@ -93,14 +93,18 @@ class SchemaField extends Component {
                     </React.Fragment>
                 );
             default:
-                const CustomTag = `${type}`;
-                return (
-                    <CustomTag {...inputProps}>
-                        <Value value={value} />
-                        {controls ? 
-                        (controls.map(control => <SchemaField key={control.id} {...control} />)) :(null)}
-                    </CustomTag>
-                );
+                if(type){
+                    const CustomTag = `${type}`;
+                    return (
+                        <CustomTag {...inputProps}>
+                            <Value value={value} />
+                            {controls ? 
+                            (controls.map((control, i) => <SchemaField key={i} {...control} />)) :(null)}
+                        </CustomTag>
+                    );
+                }else{ 
+                    return null
+                }
             }
     }
   }

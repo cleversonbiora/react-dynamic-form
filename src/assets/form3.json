@@ -46,7 +46,7 @@
         "type":"text",
         "className": "form-control",
         "value":"Cleverson",
-        "required":"true"
+        "required":true
     },
     {
         "type":"br"

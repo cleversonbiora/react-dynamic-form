@@ -1,14 +1,14 @@
 import { CHANGE_VALUE, UPDATE_STATE, ADD_VALUE } from './actionTypes';
 
-export const changeValue = value => ({
+export const changeFormValue = value => ({
   type: CHANGE_VALUE,
   payload: value
 });
-export const addValue = value => ({
+export const addFormValue = value => ({
   type: ADD_VALUE,
   payload: value
 });
-export const updateState = value => ({
+export const updateFormState = value => ({
   type: UPDATE_STATE,
   json: value
 });
