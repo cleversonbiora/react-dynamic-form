@@ -1,17 +1,14 @@
 {
   "name": "react-dynamic-form",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
     "react-redux": "^6.0.0",
-    "react-scripts": "2.1.5",
     "redux": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "env NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
+    "pre-build":"env NODE_ENV=production",
+    "build": "babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -28,6 +25,16 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-preset-react": "^6.24.1"
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "react-scripts": "2.1.5"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [ "dist", "README.md" ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cleversonbiora/react-dynamic-form"
   }
 }
