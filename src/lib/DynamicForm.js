@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import SchemaField  from './components/SchemaField';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { updateFormState } from './actions';
+import { updateFormState, updateFuncState } from './actions';
 
 class DynamicForm extends Component {
   constructor(props) {
     super(props);
     props.updateFormState(this.props.form);
+    props.updateFuncState(this.props.functions);
   }
   
   render() {
@@ -19,6 +20,6 @@ const mapStateToProps = store => ({
 });
 
 
-const mapDispatchToProps = dispatch => bindActionCreators({ updateFormState }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ updateFormState, updateFuncState }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DynamicForm);

@@ -55,7 +55,8 @@
         "id":"lastName",
         "name":"lastName",
         "type":"text",
-        "placeholder":"Escolha seu curso"
+        "placeholder":"Escolha seu curso",
+        "onFocus":"f2"
     },
     {  
         "id":"description",

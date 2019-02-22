@@ -5,13 +5,14 @@ import {DynamicForm} from './lib'
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-  }
   render() {
+    var x = {
+      f1: function() {console.log('Amendoim Logger');},
+      f2: function() {alert('Amendoim');}
+    };
     return (
       <div className="App">
-        <DynamicForm form={formJson}/>
+        <DynamicForm form={formJson} functions={x}/>
       </div>
     );
   }

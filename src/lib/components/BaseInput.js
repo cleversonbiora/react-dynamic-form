@@ -36,9 +36,9 @@ class BaseInput extends Component {
         console.log("No id for", this.props);
         throw new Error(`no id for props ${JSON.stringify(this.props)}`);
       }
-      
       const {
         values,
+        functions,
         value,
         readonly,
         disabled,
@@ -58,6 +58,17 @@ class BaseInput extends Component {
       const _onChange = ({ target: { value } }) => {
         return this.props.changeFormValue({key:this.props.id, value:value});
       };
+      if(onFocus)
+        functions[onFocus]();
+      const _onBlur = (onBlur ? () => {
+                                      return functions[onBlur]();
+                                    } 
+                              : null);
+      const _onFocus = (onFocus ? () => {
+                                        return functions[onBlur]();
+                                      } 
+                                : null);
+
       switch(inputProps.type){
         case 'select':
         case 'datalist':
@@ -74,8 +85,8 @@ class BaseInput extends Component {
                   autoFocus={autofocus}
                   value={values[inputProps.id]}
                   onChange={_onChange}
-                  onBlur={onBlur && (event => onBlur(inputProps.id, event.target.value))}
-                  onFocus={onFocus && (event => onFocus(inputProps.id, event.target.value))}
+                  onBlur={_onBlur}
+                  onFocus={_onFocus}
                   {...inputPropsWithoutType}>
                       {this.state.optionsList ? (this.state.optionsList.map(option => <option key={option.value} value={option.value} selected={option.selected}>{option.label ? option.label : option.value}</option>)):(<option value="">Selecione</option>)}
               </CustomInput>
@@ -89,8 +100,8 @@ class BaseInput extends Component {
               value={values[inputProps.id]}
               {...inputProps}
               onChange={_onChange}
-              onBlur={onBlur && (event => onBlur(inputProps.id, event.target.value))}
-              onFocus={onFocus && (event => onFocus(inputProps.id, event.target.value))}
+              onBlur={_onBlur}
+              onFocus={_onFocus}
             />
           );
         }
@@ -105,7 +116,8 @@ BaseInput.defaultProps = {
   };
 
   const mapStateToProps = (store) => ({
-    values: store.dynamicFormState.valueState
+    values: store.dynamicFormState.valueState,
+    functions: store.dynamicFormState.funcState
   });
   
   const mapDispatchToProps = dispatch => bindActionCreators({ addFormValue,changeFormValue }, dispatch);
