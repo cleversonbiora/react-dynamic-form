@@ -10,7 +10,11 @@ class BaseInput extends Component {
         props.addFormValue(payload);
         this.state = {
           optionsList: this.props.options,
-      };
+        };
+        if(this.props.onFocus)
+          this._onFocus = this.props.functions[this.props.onFocus].bind();
+        if(this.props.onBlur)
+          this._onBlur = this.props.functions[this.props.onBlur].bind();
     }
     componentDidMount() {
       if(this.props.load){
@@ -58,17 +62,7 @@ class BaseInput extends Component {
       const _onChange = ({ target: { value } }) => {
         return this.props.changeFormValue({key:this.props.id, value:value});
       };
-      if(onFocus)
-        functions[onFocus]();
-      const _onBlur = (onBlur ? () => {
-                                      return functions[onBlur]();
-                                    } 
-                              : null);
-      const _onFocus = (onFocus ? () => {
-                                        return functions[onBlur]();
-                                      } 
-                                : null);
-
+      
       switch(inputProps.type){
         case 'select':
         case 'datalist':
@@ -85,8 +79,8 @@ class BaseInput extends Component {
                   autoFocus={autofocus}
                   value={values[inputProps.id]}
                   onChange={_onChange}
-                  onBlur={_onBlur}
-                  onFocus={_onFocus}
+                  onBlur={this._onBlur}
+                  onFocus={this._onFocus}
                   {...inputPropsWithoutType}>
                       {this.state.optionsList ? (this.state.optionsList.map(option => <option key={option.value} value={option.value} selected={option.selected}>{option.label ? option.label : option.value}</option>)):(<option value="">Selecione</option>)}
               </CustomInput>
@@ -100,8 +94,8 @@ class BaseInput extends Component {
               value={values[inputProps.id]}
               {...inputProps}
               onChange={_onChange}
-              onBlur={_onBlur}
-              onFocus={_onFocus}
+              onBlur={this._onBlur}
+              onFocus={this._onFocus}
             />
           );
         }

@@ -3,7 +3,8 @@
 "type":"form",
 "method":"get",
 "async":true,
-"action":"https://integracaobancariaapi.uninter.com/v1/banco",
+"onResult":"f3",
+"action":"https://jsonplaceholder.typicode.com/posts/42",
 "className":"form",
 "controls":[
 {  
@@ -56,6 +57,7 @@
         "name":"lastName",
         "type":"text",
         "placeholder":"Escolha seu curso",
+        "onBlur":"f1",
         "onFocus":"f2"
     },
     {  
