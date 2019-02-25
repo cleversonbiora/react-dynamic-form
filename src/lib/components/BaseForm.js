@@ -34,21 +34,26 @@ class BaseForm extends Component {
     render() {
         const {
             functions,
+            onResult,
             onSubmitFunc,
+            changeFormValue,
             values,
             async,
             ...inputProps
         } = this.props;
         if(async){
             const {
+                validations,
                 method,
                 action,
                 headers,
                 ...inputPropsAsync
-            } = this.props;
+            } = inputProps;
             
             const _onSubmit = (event) => {
                 event.preventDefault();
+                // if(validations)
+                //     debugger
                 if(onSubmitFunc){
                     this._onSubmit(values);
                 }else{
@@ -84,7 +89,8 @@ BaseForm.defaultProps = {
 
   const mapStateToProps = (store) => ({
     values: store.dynamicFormState.valueState,
-    functions: store.dynamicFormState.funcState
+    functions: store.dynamicFormState.funcState,
+    validations: store.dynamicFormState.validationState
   });
   
   const mapDispatchToProps = dispatch => bindActionCreators({ changeFormValue }, dispatch);

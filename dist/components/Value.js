@@ -1,23 +1,20 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import { getVariables } from '../helpers/values';
 
 class BaseInput extends Component {
     render() {
         const {
             values,
+            validations,
             value
         } = this.props;
 
-        var variables = [],
-            regex = /{([^}]+)}/g,
-            val = `${value}`,
-            result = `${value}`,
-            match;
-
-        while (match = regex.exec(val)) {
-            result = result.replace('{' + match[1] + '}', values[match[1]]);
-            variables.push(match[1]);
-        }
+        var result = `${value}`;
+        var variables = getVariables(value);
+        variables.forEach(match => {
+            if (values[match]) result = result.replace('{' + match + '}', values[match]);else if (validations[match]) result = result.replace('{' + match + '}', validations[match]);else result = result.replace('{' + match + '}', "");
+        });
         if (variables.length > 0) {
             return React.createElement(
                 React.Fragment,
@@ -35,7 +32,8 @@ class BaseInput extends Component {
 }
 
 const mapStateToProps = store => ({
-    values: store.dynamicFormState.valueState
+    values: store.dynamicFormState.valueState,
+    validations: store.dynamicFormState.validationState
 });
 
 export default connect(mapStateToProps)(BaseInput);

@@ -16,10 +16,11 @@ class BaseInput extends Component {
             if(values[match])
                 result = result.replace('{' + match + '}', values[match]);
             else if(validations[match])  
-                result = result.replace('{' + match + '}', validations[match]);
+                result = result.replace('{' + match + '}', validations[match].value);
             else
                 result = result.replace('{' + match + '}',"");
         });
+        console.log(values)
         if(variables.length > 0){
             return (
                 <React.Fragment>

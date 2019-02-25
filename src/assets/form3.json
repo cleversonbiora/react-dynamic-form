@@ -65,7 +65,7 @@
         }
     },
     {
-        "id":"firstNameError",
+        "id":"firstNameErrorSpan",
         "type":"span",
         "value":"{firstNameError}"
     },
@@ -83,6 +83,12 @@
             "args":["selected","value"],
             "params":["{select1}", "great"],
             "body":"return selected == value"
+        },
+        "validation":{
+            "type":"minLength",
+            "rule":5,
+            "output":"lastNameError",
+            "msg":"Campo Obrigatório."
         }
     },
     {  

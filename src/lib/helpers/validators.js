@@ -10,9 +10,7 @@ export function getValidation(validation,value){
 export function minLength(rule,value){
     var val = `${value}`;
     if(val.length < rule){
-        console.log("Valor Menor");
         return false;
     }
-    console.log("Valor OK");
     return true;
 }

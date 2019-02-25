@@ -1,5 +1,5 @@
-export function isControlledComponent(type){
-    switch(type){
+export function isControlledComponent(type) {
+    switch (type) {
         case 'button':
         case 'checkbox':
         case 'color':
@@ -30,26 +30,26 @@ export function isControlledComponent(type){
             return false;
     }
 }
-export function isVoidElement(type){
-    switch(type){
-    case 'area':
-    case 'base':
-    case 'br':
-    case 'col':
-    case 'embed':
-    case 'hr':
-    case 'img':
-    case 'input':
-    case 'keygen':
-    case 'link':
-    case 'menuitem':
-    case 'meta':
-    case 'param':
-    case 'source':
-    case 'track':
-    case 'wbr':
-        return true;
-    default:
-        return false;
+export function isVoidElement(type) {
+    switch (type) {
+        case 'area':
+        case 'base':
+        case 'br':
+        case 'col':
+        case 'embed':
+        case 'hr':
+        case 'img':
+        case 'input':
+        case 'keygen':
+        case 'link':
+        case 'menuitem':
+        case 'meta':
+        case 'param':
+        case 'source':
+        case 'track':
+        case 'wbr':
+            return true;
+        default:
+            return false;
     }
 }

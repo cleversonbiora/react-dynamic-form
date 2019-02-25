@@ -5,16 +5,34 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addFormValue, changeFormValue } from '../actions';
+import { addFormValue, changeFormValue, addValidationValue, changeValidationValue } from '../actions';
+import { execFunc } from "../helpers/functions";
+import { getValidation } from "../helpers/validators";
 
 class BaseInput extends Component {
   constructor(props) {
     super(props);
     var payload = { key: this.props.id, value: this.props.value ? this.props.value : "" };
     props.addFormValue(payload);
+    if (this.props.validation) {
+      var payloadVal = { key: this.props.validation.output, value: "" };
+      props.addValidationValue(payloadVal);
+    }
     this.state = {
-      optionsList: this.props.options
+      optionsList: this.props.options,
+      value: this.props.value
     };
+    if (this.props.onFocus) this._onFocus = this.props.functions[this.props.onFocus].bind();
+    if (this.props.onBlur) this._onBlur = this.props.functions[this.props.onBlur].bind();
+    if (this.props.validation) {
+      this._onBlur = () => {
+        if (!getValidation(this.props.validation, this.state.value)) {
+          this.props.changeValidationValue({ key: this.props.validation.output, value: this.props.validation.msg });
+        } else {
+          this.props.changeValidationValue({ key: this.props.validation.output, value: "" });
+        }
+      };
+    }
   }
   componentDidMount() {
     if (this.props.load) {
@@ -27,6 +45,7 @@ class BaseInput extends Component {
         root
       } = this.props.load;
       fetch(apiUrl, { method: method || 'GET', headers: headers }).then(response => response.json()).then(data => {
+        // eslint-disable-next-line
         (root ? data[root] : data).map(item => {
           this.setState({ optionsList: [...this.state.optionsList, { value: item[valueField], label: item[labelField] }] });
         });
@@ -38,10 +57,11 @@ class BaseInput extends Component {
       console.log("No id for", this.props);
       throw new Error(`no id for props ${JSON.stringify(this.props)}`);
     }
-
     const _props = this.props,
           {
       values,
+      hidden,
+      functions,
       value,
       readonly,
       disabled,
@@ -56,11 +76,17 @@ class BaseInput extends Component {
       rawErrors,
       className
     } = _props,
-          inputProps = _objectWithoutProperties(_props, ['values', 'value', 'readonly', 'disabled', 'autofocus', 'onBlur', 'onFocus', 'onChange', 'options', 'schema', 'formContext', 'registry', 'rawErrors', 'className']);
+          inputProps = _objectWithoutProperties(_props, ['values', 'hidden', 'functions', 'value', 'readonly', 'disabled', 'autofocus', 'onBlur', 'onFocus', 'onChange', 'options', 'schema', 'formContext', 'registry', 'rawErrors', 'className']);
     inputProps.type = inputProps.type || "text";
     const _onChange = ({ target: { value } }) => {
+      this.setState({ value: value });
       return this.props.changeFormValue({ key: this.props.id, value: value });
     };
+
+    if (hidden && values) {
+      if (execFunc(hidden, values)) return null;
+    }
+
     switch (inputProps.type) {
       case 'select':
       case 'datalist':
@@ -78,8 +104,8 @@ class BaseInput extends Component {
             autoFocus: autofocus,
             value: values[inputProps.id],
             onChange: _onChange,
-            onBlur: onBlur && (event => onBlur(inputProps.id, event.target.value)),
-            onFocus: onFocus && (event => onFocus(inputProps.id, event.target.value))
+            onBlur: this._onBlur,
+            onFocus: this._onFocus
           }, inputPropsWithoutType),
           this.state.optionsList ? this.state.optionsList.map(option => React.createElement(
             'option',
@@ -99,8 +125,8 @@ class BaseInput extends Component {
           value: values[inputProps.id]
         }, inputProps, {
           onChange: _onChange,
-          onBlur: onBlur && (event => onBlur(inputProps.id, event.target.value)),
-          onFocus: onFocus && (event => onFocus(inputProps.id, event.target.value))
+          onBlur: this._onBlur,
+          onFocus: this._onFocus
         }));
     }
   }
@@ -114,9 +140,10 @@ BaseInput.defaultProps = {
 };
 
 const mapStateToProps = store => ({
-  values: store.dynamicFormState.valueState
+  values: store.dynamicFormState.valueState,
+  functions: store.dynamicFormState.funcState
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ addFormValue, changeFormValue }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ addFormValue, changeFormValue, addValidationValue, changeValidationValue }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(BaseInput);

@@ -15,6 +15,7 @@ class CustomElement extends Component {
             type,
             controls,
             value,
+            dispatch,
             ...inputProps
         } = this.props;
         if(hidden && values){ 
