@@ -1,20 +1,36 @@
 import React,{Component} from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addFormValue, changeFormValue } from '../actions';
+import { addFormValue, changeFormValue, addValidationValue, changeValidationValue } from '../actions';
+import { execFunc } from "../helpers/functions";
+import { getValidation } from "../helpers/validators";
 
 class BaseInput extends Component {
     constructor(props) {
         super(props);
         var payload = {key:this.props.id, value:(this.props.value ? this.props.value : "")};
         props.addFormValue(payload);
+        if(this.props.validation){
+          var payloadVal = {key:this.props.validation.output, value:""};
+          props.addValidationValue(payloadVal);
+        }
         this.state = {
           optionsList: this.props.options,
+          value: this.props.value
         };
         if(this.props.onFocus)
           this._onFocus = this.props.functions[this.props.onFocus].bind();
         if(this.props.onBlur)
           this._onBlur = this.props.functions[this.props.onBlur].bind();
+        if(this.props.validation){
+          this._onBlur = () => {
+            if(!getValidation(this.props.validation,this.state.value)){
+              this.props.changeValidationValue({key:this.props.validation.output, value:this.props.validation.msg});
+            }else{
+              this.props.changeValidationValue({key:this.props.validation.output, value:""});
+            }
+          };
+        }
     }
     componentDidMount() {
       if(this.props.load){
@@ -29,6 +45,7 @@ class BaseInput extends Component {
         fetch(apiUrl,{method: method || 'GET',headers: headers})
         .then(response => response.json())
         .then(data => {
+          // eslint-disable-next-line
           (root ? data[root] : data).map((item) => {
             this.setState({optionsList: [...this.state.optionsList, {value: item[valueField], label: item[labelField]}]});
           });
@@ -42,6 +59,7 @@ class BaseInput extends Component {
       }
       const {
         values,
+        hidden,
         functions,
         value,
         readonly,
@@ -60,8 +78,14 @@ class BaseInput extends Component {
       } = this.props;
       inputProps.type = inputProps.type || "text";
       const _onChange = ({ target: { value } }) => {
+        this.setState({value: value});
         return this.props.changeFormValue({key:this.props.id, value:value});
       };
+      
+      if(hidden && values){ 
+        if(execFunc(hidden,values))
+            return null;
+      }
       
       switch(inputProps.type){
         case 'select':
@@ -114,6 +138,6 @@ BaseInput.defaultProps = {
     functions: store.dynamicFormState.funcState
   });
   
-  const mapDispatchToProps = dispatch => bindActionCreators({ addFormValue,changeFormValue }, dispatch);
+  const mapDispatchToProps = dispatch => bindActionCreators({ addFormValue,changeFormValue,addValidationValue, changeValidationValue}, dispatch);
   
   export default connect(mapStateToProps, mapDispatchToProps)(BaseInput);

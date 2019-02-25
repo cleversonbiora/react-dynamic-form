@@ -24,6 +24,7 @@ class BaseForm extends Component {
         fetch(apiUrl,{method: method || 'GET',headers: headers})
         .then(response => response.json())
         .then(data => {
+          // eslint-disable-next-line
           (root ? data[root] : data).map((item) => {
             this.setState({optionsList: [...this.state.optionsList, {value: item[valueField], label: item[labelField]}]});
           });
@@ -32,6 +33,7 @@ class BaseForm extends Component {
     }
     render() {
         const {
+            functions,
             onSubmitFunc,
             values,
             async,

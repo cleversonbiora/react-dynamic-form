@@ -34,6 +34,16 @@
         "value":"Descrição de um elemento."
     },
     {
+        "id":"hiddenContent",
+        "type":"p",
+        "value":"Valor que so aparece .",
+        "hidden":{
+            "args":["selected","value"],
+            "params":["{select1}", "great"],
+            "body":"return selected == value"
+        }
+    },
+    {
         "type":"fragment",
         "value":"Texto solto."
     },
@@ -47,7 +57,17 @@
         "type":"text",
         "className": "form-control",
         "value":"Cleverson",
-        "required":true
+        "validation":{
+            "type":"minLength",
+            "rule":5,
+            "output":"firstNameError",
+            "msg":"Campo Obrigatório."
+        }
+    },
+    {
+        "id":"firstNameError",
+        "type":"span",
+        "value":"{firstNameError}"
     },
     {
         "type":"br"
@@ -58,7 +78,12 @@
         "type":"text",
         "placeholder":"Escolha seu curso",
         "onBlur":"f1",
-        "onFocus":"f2"
+        "onFocus":"f2",
+        "hidden":{
+            "args":["selected","value"],
+            "params":["{select1}", "great"],
+            "body":"return selected == value"
+        }
     },
     {  
         "id":"description",
