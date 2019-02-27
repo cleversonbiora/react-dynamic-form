@@ -35,22 +35,26 @@ class BaseForm extends Component {
         const _props = this.props,
               {
             functions,
+            onResult,
             onSubmitFunc,
+            changeFormValue,
             values,
             async
         } = _props,
-              inputProps = _objectWithoutProperties(_props, ['functions', 'onSubmitFunc', 'values', 'async']);
+              inputProps = _objectWithoutProperties(_props, ['functions', 'onResult', 'onSubmitFunc', 'changeFormValue', 'values', 'async']);
         if (async) {
-            const _props2 = this.props,
-                  {
+            const {
+                validations,
                 method,
                 action,
                 headers
-            } = _props2,
-                  inputPropsAsync = _objectWithoutProperties(_props2, ['method', 'action', 'headers']);
+            } = inputProps,
+                  inputPropsAsync = _objectWithoutProperties(inputProps, ['validations', 'method', 'action', 'headers']);
 
             const _onSubmit = event => {
                 event.preventDefault();
+                // if(validations)
+                //     debugger
                 if (onSubmitFunc) {
                     this._onSubmit(values);
                 } else {
@@ -78,7 +82,8 @@ BaseForm.defaultProps = {
 
 const mapStateToProps = store => ({
     values: store.dynamicFormState.valueState,
-    functions: store.dynamicFormState.funcState
+    functions: store.dynamicFormState.funcState,
+    validations: store.dynamicFormState.validationState
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ changeFormValue }, dispatch);

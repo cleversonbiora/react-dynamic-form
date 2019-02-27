@@ -20,7 +20,6 @@ class BaseInput extends Component {
             else
                 result = result.replace('{' + match + '}',"");
         });
-        console.log(values)
         if(variables.length > 0){
             return (
                 <React.Fragment>

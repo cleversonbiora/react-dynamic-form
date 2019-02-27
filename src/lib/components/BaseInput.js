@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { addFormValue, changeFormValue, addValidationValue, changeValidationValue } from '../actions';
 import { execFunc } from "../helpers/functions";
 import { getValidation } from "../helpers/validators";
+import {getVariables} from '../helpers/values';
 
 class BaseInput extends Component {
     constructor(props) {
@@ -24,34 +25,67 @@ class BaseInput extends Component {
           this._onBlur = this.props.functions[this.props.onBlur].bind();
         if(this.props.validation){
           this._onBlur = () => {
-            if(!getValidation(this.props.validation,this.state.value)){
-              this.props.changeValidationValue({key:this.props.validation.output, valid: false, value:this.props.validation.msg});
-            }else{
-              this.props.changeValidationValue({key:this.props.validation.output, valid: true, value:""});
-            }
+            const [valid, value] = getValidation(this.props.validation,this.state.value, this.props.values);
+            this.props.changeValidationValue({key:this.props.validation.output, valid: valid, value:value});
           };
         }
     }
-    componentDidMount() {
-      if(this.props.load){
-        const {
-          apiUrl,
-          method,
-          headers,
-          valueField,
-          labelField,
-          root
-        } = this.props.load
-        fetch(apiUrl,{method: method || 'GET',headers: headers})
-        .then(response => response.json())
-        .then(data => {
-          // eslint-disable-next-line
-          (root ? data[root] : data).map((item) => {
-            this.setState({optionsList: [...this.state.optionsList, {value: item[valueField], label: item[labelField]}]});
-          });
-        });
+    componentDidUpdate(prevProps) {
+      if (this.props.load && this.props.values[this.props.load.trigger] !== prevProps.values[prevProps.load.trigger]) {
+        if(this.props.values[this.props.load.trigger] || this.props.load.emptyLoad){
+          this.loadOptions();
+        }else{
+          this.unloadOptions();
+        }
       }
     }
+    componentDidMount() {
+      if (this.props.load && (!this.props.load.trigger || this.props.load.emptyLoad)) {
+        this.loadOptions();
+      }
+    }
+    loadOptions() {
+        const { apiUrl, method, headers, valueField, labelField, root, body } = this.props.load;
+        var apiUrlVariabel = `${apiUrl}`;
+        var variables = getVariables(apiUrl);
+        variables.forEach(match => {
+            if(this.props.values[match])
+              apiUrlVariabel = apiUrlVariabel.replace('{' + match + '}', this.props.values[match]);
+            else
+              apiUrlVariabel = apiUrlVariabel.replace('{' + match + '}',"");
+        });
+        fetch(apiUrlVariabel, { method: method || 'GET', headers: headers, body: body || null })
+          .then(response => response.json())
+          .then(data => {
+            if(!data)
+              return;
+            if (this.props.load.override) {
+              // eslint-disable-next-line
+              root ? this.setState({
+              optionsList: data[root].map((item) => {
+                return { value: item[valueField], label: item[labelField] };
+              })
+              })
+                : this.setState({
+                optionsList: data.map((item) => {
+                  return { value: item[valueField], label: item[labelField] };
+                })
+                });
+            }
+            else {
+              this.setState({ optionsList: this.props.options});
+              // eslint-disable-next-line
+              (root ? data[root] : data).map((item) => {
+                this.setState({ optionsList: [...this.state.optionsList, { value: item[valueField], label: item[labelField] }] });
+              });
+            }
+          });
+    }
+
+    unloadOptions() {
+      this.setState({ optionsList: this.props.options});
+    }
+
     render() {
       if (!this.props.id) {
         console.log("No id for", this.props);

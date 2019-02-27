@@ -58,10 +58,28 @@
         "className": "form-control",
         "value":"Cleverson",
         "validation":{
-            "type":"minLength",
-            "rule":5,
             "output":"firstNameError",
-            "msg":"Campo Obrigatório."
+            "validators":[{
+                "type":"required",
+                "msg":"Campo obrigatório."
+            },
+            {
+                "type":"minLength",
+                "params":[8],
+                "msg":"Menor que 8."
+            },
+            {
+                "type":"maxLength",
+                "params":[20],
+                "msg":"Maior que 20."
+            },
+            {
+                "type":"custom",
+                "args":["lastName"],
+                "params":["{lastName}"],
+                "body":"return lastName !== value",
+                "msg":"Nome Igual Sobrenome"
+            }]
         }
     },
     {
@@ -79,17 +97,47 @@
         "placeholder":"Escolha seu curso",
         "onBlur":"f1",
         "onFocus":"f2",
+        "value":"Martins Biora",
         "hidden":{
             "args":["selected","value"],
             "params":["{select1}", "great"],
             "body":"return selected == value"
         },
         "validation":{
-            "type":"minLength",
-            "rule":5,
-            "output":"lastNameError",
-            "msg":"Campo Obrigatório."
+            "output":"emailError",
+            "validators":[{
+                "type":"required",
+                "msg":"Campo obrigatório."
+            },
+            {
+                "type":"pattern",
+                "params":["(\\w+)\\s(\\w+)"],
+                "msg":"Inválido."
+            }]
         }
+    },
+    {  
+        "id":"email",
+        "name":"email",
+        "type":"text",
+        "className": "form-control",
+        "value":"",
+        "validation":{
+            "output":"emailError",
+            "validators":[{
+                "type":"required",
+                "msg":"Campo obrigatório."
+            },
+            {
+                "type":"email",
+                "msg":"Email inválido."
+            }]
+        }
+    },
+    {
+        "id":"emailErrorSpan",
+        "type":"span",
+        "value":"{emailError}"
     },
     {  
         "id":"description",
@@ -141,7 +189,7 @@
         "id":"select2",
         "name":"select2",
         "type":"select",
-        "value":"2",
+        "value":"",
         "options":[  
             {  
                "value":"",
@@ -158,7 +206,60 @@
                   },
                   "valueField":"id",
                   "labelField":"nome",
+                  "root":"data",
+                  "override":false
+        }
+    },
+    {  
+        "id":"select3",
+        "name":"select3",
+        "type":"select",
+        "value":"2",
+        "options":[  
+            {  
+               "value":"",
+               "label":"Selecione"
+            }
+         ],
+         "load":{  
+                  "apiUrl":"https://integracaobancariaapi.uninter.com/v1/banco?id={select2}",
+                  "method":"GET",
+                  "headers":{
+                        "Content-Type":"application/json",
+                        "X-Custom-Header": "ProcessThisImmediately",
+                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M"
+                  },
+                  "trigger":"select2",
+                  "emptyLoad":false,
+                  "valueField":"id",
+                  "labelField":"nome",
                   "root":"data"
+        }
+    },
+    {  
+        "id":"select4",
+        "name":"select4",
+        "type":"select",
+        "value":"",
+        "options":[  
+            {  
+               "value":"",
+               "label":"Selecione"
+            }
+         ],
+         "load":{  
+                  "apiUrl":"https://jsonplaceholder.typicode.com/posts",
+                  "method":"POST",
+                  "body":"{\"data\":[{\"id\":1,\"nome\":\"amendoim\"},{\"id\":2,\"nome\":\"hipopotamo\"},{\"id\":3,\"nome\":\"plutonio\"}]}",
+                  "headers":{
+                        "Content-Type":"application/json",
+                        "X-Custom-Header": "ProcessThisImmediately",
+                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M"
+                  },
+                  "valueField":"id",
+                  "labelField":"nome",
+                  "root":"data",
+                  "override":true
         }
     },
     {  

@@ -19,9 +19,10 @@ class CustomElement extends Component {
             hidden,
             type,
             controls,
-            value
+            value,
+            dispatch
         } = _props,
-              inputProps = _objectWithoutProperties(_props, ["values", "hidden", "type", "controls", "value"]);
+              inputProps = _objectWithoutProperties(_props, ["values", "hidden", "type", "controls", "value", "dispatch"]);
         if (hidden && values) {
             if (execFunc(hidden, values)) return null;
         }

@@ -15,7 +15,7 @@ class BaseInput extends Component {
     var payload = { key: this.props.id, value: this.props.value ? this.props.value : "" };
     props.addFormValue(payload);
     if (this.props.validation) {
-      var payloadVal = { key: this.props.validation.output, value: "" };
+      var payloadVal = { key: this.props.validation.output, valid: true, value: "" };
       props.addValidationValue(payloadVal);
     }
     this.state = {
@@ -27,9 +27,9 @@ class BaseInput extends Component {
     if (this.props.validation) {
       this._onBlur = () => {
         if (!getValidation(this.props.validation, this.state.value)) {
-          this.props.changeValidationValue({ key: this.props.validation.output, value: this.props.validation.msg });
+          this.props.changeValidationValue({ key: this.props.validation.output, valid: false, value: this.props.validation.msg });
         } else {
-          this.props.changeValidationValue({ key: this.props.validation.output, value: "" });
+          this.props.changeValidationValue({ key: this.props.validation.output, valid: true, value: "" });
         }
       };
     }
@@ -74,19 +74,25 @@ class BaseInput extends Component {
       formContext,
       registry,
       rawErrors,
-      className
+      className,
+      addFormValue,
+      addValidationValue,
+      changeFormValue,
+      changeValidationValue
     } = _props,
-          inputProps = _objectWithoutProperties(_props, ['values', 'hidden', 'functions', 'value', 'readonly', 'disabled', 'autofocus', 'onBlur', 'onFocus', 'onChange', 'options', 'schema', 'formContext', 'registry', 'rawErrors', 'className']);
+          inputProps = _objectWithoutProperties(_props, ['values', 'hidden', 'functions', 'value', 'readonly', 'disabled', 'autofocus', 'onBlur', 'onFocus', 'onChange', 'options', 'schema', 'formContext', 'registry', 'rawErrors', 'className', 'addFormValue', 'addValidationValue', 'changeFormValue', 'changeValidationValue']);
     inputProps.type = inputProps.type || "text";
     const _onChange = ({ target: { value } }) => {
       this.setState({ value: value });
-      return this.props.changeFormValue({ key: this.props.id, value: value });
+      return changeFormValue({ key: this.props.id, value: value });
     };
 
     if (hidden && values) {
       if (execFunc(hidden, values)) return null;
     }
 
+    let val = values[inputProps.id];
+    if (!val) val = "";
     switch (inputProps.type) {
       case 'select':
       case 'datalist':
@@ -96,13 +102,14 @@ class BaseInput extends Component {
           type
         } = inputProps,
               inputPropsWithoutType = _objectWithoutProperties(inputProps, ['type']);
+
         return React.createElement(
           CustomInput,
           _extends({
             readOnly: readonly,
             disabled: disabled,
             autoFocus: autofocus,
-            value: values[inputProps.id],
+            value: val,
             onChange: _onChange,
             onBlur: this._onBlur,
             onFocus: this._onFocus
@@ -122,7 +129,7 @@ class BaseInput extends Component {
           readOnly: readonly,
           disabled: disabled,
           autoFocus: autofocus,
-          value: values[inputProps.id]
+          value: val
         }, inputProps, {
           onChange: _onChange,
           onBlur: this._onBlur,

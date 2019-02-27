@@ -13,8 +13,9 @@ class BaseInput extends Component {
         var result = `${value}`;
         var variables = getVariables(value);
         variables.forEach(match => {
-            if (values[match]) result = result.replace('{' + match + '}', values[match]);else if (validations[match]) result = result.replace('{' + match + '}', validations[match]);else result = result.replace('{' + match + '}', "");
+            if (values[match]) result = result.replace('{' + match + '}', values[match]);else if (validations[match]) result = result.replace('{' + match + '}', validations[match].value);else result = result.replace('{' + match + '}', "");
         });
+        console.log(values);
         if (variables.length > 0) {
             return React.createElement(
                 React.Fragment,
