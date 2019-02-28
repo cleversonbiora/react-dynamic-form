@@ -1,6 +1,6 @@
 export function getVariables(value){
     var variables = [],
-    regex = /{([^}]+)}/g,
+    regex = /{([\w-_]{1,})}/g,
     val = `${value}`,
     match;
 

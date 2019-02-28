@@ -1,7 +1,7 @@
 import React,{Component} from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addFormValue, changeFormValue, addValidationValue, changeValidationValue } from '../actions';
+import { addFormValue, changeFormValue, addValidationValue, changeValidationValue,addValidator } from '../actions';
 import { execFunc } from "../helpers/functions";
 import { getValidation } from "../helpers/validators";
 import {getVariables,getFormValue} from '../helpers/values';
@@ -9,12 +9,10 @@ import {getVariables,getFormValue} from '../helpers/values';
 class BaseInput extends Component {
     constructor(props) {
         super(props);
-        var payload = {form: props.formId, key:props.id, value:(props.value ? props.value : "")};
-        //if(props.type !== "submit" && props.type !== "button")
-          props.addFormValue(payload);
+        props.addFormValue({form: props.formId, key:props.id, value:(props.value ? props.value : "")});
         if(this.props.validation){
-          var payloadVal = {key:props.validation.output, valid: true, value:""};
-          props.addValidationValue(payloadVal);
+          props.addValidationValue({key: props.validation.output, valid: true, value:""});
+          props.addValidator({ form: props.formId, key: props.id, value: props.validation});
         }
         this.state = {
           optionsList: props.options,
@@ -26,8 +24,10 @@ class BaseInput extends Component {
           this._onBlur = props.functions[props.onBlur].bind();
         if(this.props.validation){
           this._onBlur = () => {
-            const [valid, value] = getValidation(props.validation,this.state.value, props.values[props.formId]);
-            props.changeValidationValue({key:props.validation.output, valid: valid, value:value});
+            getValidation(this.props.validation,this.state.value, this.props.values[this.props.formId])
+              .then(([output, valid, value]) => {
+                  this.props.changeValidationValue({key:output, valid: valid, value:value});
+                });
           };
         }
     }
@@ -55,7 +55,20 @@ class BaseInput extends Component {
             else
               apiUrlVariabel = apiUrlVariabel.replace('{' + match + '}',"");
         });
-        fetch(apiUrlVariabel, { method: method || 'GET', headers: headers, body: body || null })
+        var bodyVariable;
+        if(body){
+          bodyVariable = `${body}`;
+          var vars = getVariables(body);
+          vars.forEach(match => {
+            if(getFormValue(this.props.formId, match, this.props.values))
+              bodyVariable = bodyVariable.replace('{' + match + '}', getFormValue(this.props.formId, match, this.props.values));
+            else
+              bodyVariable = bodyVariable.replace('{' + match + '}',"");
+        });
+        }else{
+          bodyVariable = null;
+        }
+        fetch(apiUrlVariabel, { method: method || 'GET', headers: headers, body: bodyVariable })
           .then(response => response.json())
           .then(data => {
             if(!data)
@@ -115,6 +128,7 @@ class BaseInput extends Component {
         addValidationValue,
         changeFormValue,
         changeValidationValue,
+        addValidator,
         formId,
         ...inputProps
       } = this.props;
@@ -182,6 +196,6 @@ BaseInput.defaultProps = {
     functions: store.dynamicFormState.funcState
   });
   
-  const mapDispatchToProps = dispatch => bindActionCreators({ addFormValue,changeFormValue,addValidationValue, changeValidationValue}, dispatch);
+  const mapDispatchToProps = dispatch => bindActionCreators({ addFormValue,changeFormValue,addValidationValue, changeValidationValue,addValidator}, dispatch);
   
   export default connect(mapStateToProps, mapDispatchToProps)(BaseInput);

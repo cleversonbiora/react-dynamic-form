@@ -6,7 +6,7 @@
         "id":"mainForm",
         "type":"form",
         "method":"get",
-        "async":false,
+        "async":true,
         "onResult":"f3",
         "action":"https://jsonplaceholder.typicode.com/posts/42",
         "className":"form",
@@ -108,7 +108,7 @@
                     "body":"return selected == value"
                 },
                 "validation":{
-                    "output":"emailError",
+                    "output":"lastNameError",
                     "validators":[{
                         "type":"required",
                         "msg":"Campo obrigatório."
@@ -119,6 +119,11 @@
                         "msg":"Inválido."
                     }]
                 }
+            },
+            {
+                "id":"lastNameErrorSpan",
+                "type":"span",
+                "value":"{lastNameError}"
             },
             {  
                 "id":"email",
@@ -135,6 +140,17 @@
                     {
                         "type":"email",
                         "msg":"Email inválido."
+                    },
+                    {
+                        "type":"async",
+                        "msg":"Email ja cadastrado.",
+                        "apiUrl":"https://integracaobancariaapi.uninter.com/v1/banco?email={email}",
+                        "method":"GET",
+                        "headers":{
+                                "Content-Type":"application/json",
+                                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M"
+                        },
+                        "valueField":"success"
                     }]
                 }
             },
@@ -313,5 +329,9 @@
                 "className": "btn btn-default"
             }
         ]
+    },
+    {  
+        "id":"teste",
+        "type":"CustomDiv"
     }]
 }

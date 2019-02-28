@@ -1,12 +1,20 @@
-import { isVariable, getVariableString } from "./values";
+import { isVariable, getVariableString, getVariables } from "./values";
 
-export function getValidation(validation,value,values = {}){
+export async function getValidation(validation,value,values = {}){
     let valid = true;
     let msg = "";
+    let output = validation.output;
     for (let element of validation.validators) {
         if(!Validators[element.type])
             continue;
-        if(element.params){
+        if(element.type === 'async'){
+            var result = await Validators[element.type](element, values);
+            if(!result){
+                valid = false;
+                msg = element.msg;
+            }
+        }
+        else if(element.params){
             var params = element.params.map(val => isVariable(val) ? values[getVariableString(val)] : val);
             if(element.type === 'custom'){
                 if(!Validators[element.type](element, [value,...params])){
@@ -28,7 +36,7 @@ export function getValidation(validation,value,values = {}){
         if(!valid)
             break;
     }
-    return [valid,msg];
+    return [output,valid,msg];
 }
 
 export class Validators{ 
@@ -92,5 +100,38 @@ export class Validators{
         // eslint-disable-next-line
         var jsonFunc = new Function(["value",...rule.args], rule.body);
         return jsonFunc(...args)
+    }
+
+    static async async(rule, values){
+        const { apiUrl, method, headers, valueField, root, body } = rule;
+        var apiUrlVariabel = `${apiUrl}`;
+        var variables = getVariables(apiUrl);
+        variables.forEach(match => {
+            if(values[match])
+              apiUrlVariabel = apiUrlVariabel.replace('{' + match + '}', values[match]);
+            else
+              apiUrlVariabel = apiUrlVariabel.replace('{' + match + '}',"");
+        });
+        var bodyVariable;
+        if(body){
+          bodyVariable = `${body}`;
+          var vars = getVariables(body);
+          vars.forEach(match => {
+            if(values[match])
+              bodyVariable = bodyVariable.replace('{' + match + '}', values[match]);
+            else
+              bodyVariable = bodyVariable.replace('{' + match + '}',"");
+        });
+        }else{
+          bodyVariable = null;
+        }
+        var result = await fetch(apiUrlVariabel, { method: method || 'GET', headers: headers, body: bodyVariable })
+            .then(response => response.json())
+            .then(data => {
+                if(!data)
+                   return false;
+                return root ? data[root][valueField] : data[valueField];
+            });
+        return result;
     }
 }
