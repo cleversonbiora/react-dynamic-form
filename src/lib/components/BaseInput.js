@@ -4,35 +4,36 @@ import { bindActionCreators } from 'redux';
 import { addFormValue, changeFormValue, addValidationValue, changeValidationValue } from '../actions';
 import { execFunc } from "../helpers/functions";
 import { getValidation } from "../helpers/validators";
-import {getVariables} from '../helpers/values';
+import {getVariables,getFormValue} from '../helpers/values';
 
 class BaseInput extends Component {
     constructor(props) {
         super(props);
-        var payload = {key:this.props.id, value:(this.props.value ? this.props.value : "")};
-        props.addFormValue(payload);
+        var payload = {form: props.formId, key:props.id, value:(props.value ? props.value : "")};
+        //if(props.type !== "submit" && props.type !== "button")
+          props.addFormValue(payload);
         if(this.props.validation){
-          var payloadVal = {key:this.props.validation.output, valid: true, value:""};
+          var payloadVal = {key:props.validation.output, valid: true, value:""};
           props.addValidationValue(payloadVal);
         }
         this.state = {
-          optionsList: this.props.options,
-          value: this.props.value
+          optionsList: props.options,
+          value: props.value
         };
         if(this.props.onFocus)
-          this._onFocus = this.props.functions[this.props.onFocus].bind();
+          this._onFocus = props.functions[props.onFocus].bind();
         if(this.props.onBlur)
-          this._onBlur = this.props.functions[this.props.onBlur].bind();
+          this._onBlur = props.functions[props.onBlur].bind();
         if(this.props.validation){
           this._onBlur = () => {
-            const [valid, value] = getValidation(this.props.validation,this.state.value, this.props.values);
-            this.props.changeValidationValue({key:this.props.validation.output, valid: valid, value:value});
+            const [valid, value] = getValidation(props.validation,this.state.value, props.values[props.formId]);
+            props.changeValidationValue({key:props.validation.output, valid: valid, value:value});
           };
         }
     }
     componentDidUpdate(prevProps) {
-      if (this.props.load && this.props.values[this.props.load.trigger] !== prevProps.values[prevProps.load.trigger]) {
-        if(this.props.values[this.props.load.trigger] || this.props.load.emptyLoad){
+      if (this.props.load && getFormValue(this.props.formId, this.props.id, this.props.values) !== getFormValue(prevProps.formId, prevProps.id, prevProps.values) ) {
+        if(getFormValue(this.props.formId, this.props.id, this.props.values) || this.props.load.emptyLoad){
           this.loadOptions();
         }else{
           this.unloadOptions();
@@ -49,8 +50,8 @@ class BaseInput extends Component {
         var apiUrlVariabel = `${apiUrl}`;
         var variables = getVariables(apiUrl);
         variables.forEach(match => {
-            if(this.props.values[match])
-              apiUrlVariabel = apiUrlVariabel.replace('{' + match + '}', this.props.values[match]);
+            if(getFormValue(this.props.formId, match, this.props.values))
+              apiUrlVariabel = apiUrlVariabel.replace('{' + match + '}', getFormValue(this.props.formId, match, this.props.values));
             else
               apiUrlVariabel = apiUrlVariabel.replace('{' + match + '}',"");
         });
@@ -95,6 +96,8 @@ class BaseInput extends Component {
         values,
         hidden,
         functions,
+        validation,
+        load,
         value,
         readonly,
         disabled,
@@ -112,6 +115,7 @@ class BaseInput extends Component {
         addValidationValue,
         changeFormValue,
         changeValidationValue,
+        formId,
         ...inputProps
       } = this.props;
       inputProps.type = inputProps.type || "text";
@@ -125,9 +129,7 @@ class BaseInput extends Component {
             return null;
       }
       
-      let val = values[inputProps.id];
-      if(!val)
-        val = "";
+      let val = getFormValue(formId, inputProps.id, values);
       switch(inputProps.type){
         case 'select':
         case 'datalist':

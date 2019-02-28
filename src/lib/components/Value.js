@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import { connect } from 'react-redux';
-import {getVariables} from '../helpers/values';
+import {getVariables,mergeValues} from '../helpers/values';
 
 class BaseInput extends Component {
     render() {
@@ -12,9 +12,10 @@ class BaseInput extends Component {
         
         var result = `${value}`;
         var variables = getVariables(value);
+        let mergedValues = mergeValues(values);
         variables.forEach(match => {
-            if(values[match])
-                result = result.replace('{' + match + '}', values[match]);
+            if(mergedValues[match])
+                result = result.replace('{' + match + '}', mergedValues[match]);
             else if(validations[match])  
                 result = result.replace('{' + match + '}', validations[match].value);
             else

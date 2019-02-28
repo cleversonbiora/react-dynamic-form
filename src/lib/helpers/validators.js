@@ -1,6 +1,6 @@
 import { isVariable, getVariableString } from "./values";
 
-export function getValidation(validation,value,values){
+export function getValidation(validation,value,values = {}){
     let valid = true;
     let msg = "";
     for (let element of validation.validators) {

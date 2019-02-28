@@ -21,3 +21,20 @@ export function getVariableString(value){
     var val = `${value}`;
     return val.substring(1, val.length - 1);
 }
+
+export function getFormValue(formId, id, values){
+    let val = "";
+    if(values[formId])
+        if(values[formId][id])
+            val = values[formId][id];
+    return val;
+}
+
+export function mergeValues(values){
+    let forms = Object.keys(values).map(function(e) { return values[e] });
+    // eslint-disable-next-line
+    let mergedValues = {};
+    if(forms.length > 0)
+        mergedValues = Object.assign(...forms);
+    return mergedValues;
+}

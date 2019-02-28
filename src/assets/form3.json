@@ -1,272 +1,317 @@
 {
-"id":"mainForm",
-"type":"form",
-"method":"get",
-"async":true,
-"onResult":"f3",
-"action":"https://jsonplaceholder.typicode.com/posts/42",
-"className":"form",
-"controls":[
-{  
-    "id":"mainGroup",
+    "id":"mainDiv",
     "type":"div",
-    "className":"row",
-    "controls":[{  
-        "id":"titleForm",
-        "type":"h1",
-        "value":"Formulario",
-        "className": "title"
-    },
+    "controls":[
     {
-        "type":"p",
-        "style":{"color":"red"},
-        "value":"Hello, {firstName} {lastName}"
-    },
-    {  
-        "id":"subtitleForm",
-        "type":"h2",
-        "value":"Formulario",
-        "className": "title"
-    },
-    {
-        "id":"paragraph",
-        "type":"p",
-        "value":"Descrição de um elemento."
-    },
-    {
-        "id":"hiddenContent",
-        "type":"p",
-        "value":"Valor que so aparece .",
-        "hidden":{
-            "args":["selected","value"],
-            "params":["{select1}", "great"],
-            "body":"return selected == value"
-        }
-    },
-    {
-        "type":"fragment",
-        "value":"Texto solto."
-    },
-    {
-        "type":"img",
-        "src":"/img/tt.jpg"
-    },
-    {  
-        "id":"firstName",
-        "name":"firstName",
-        "type":"text",
-        "className": "form-control",
-        "value":"Cleverson",
-        "validation":{
-            "output":"firstNameError",
-            "validators":[{
-                "type":"required",
-                "msg":"Campo obrigatório."
+        "id":"mainForm",
+        "type":"form",
+        "method":"get",
+        "async":false,
+        "onResult":"f3",
+        "action":"https://jsonplaceholder.typicode.com/posts/42",
+        "className":"form",
+        "controls":[
+        {  
+            "id":"mainGroup",
+            "type":"div",
+            "className":"row",
+            "controls":[{  
+                "id":"titleForm",
+                "type":"h1",
+                "value":"Formulario",
+                "className": "title"
             },
             {
-                "type":"minLength",
-                "params":[8],
-                "msg":"Menor que 8."
+                "type":"p",
+                "style":{"color":"red"},
+                "value":"Hello, {firstName} {lastName}"
+            },
+            {  
+                "id":"subtitleForm",
+                "type":"h2",
+                "value":"Formulario",
+                "className": "title"
             },
             {
-                "type":"maxLength",
-                "params":[20],
-                "msg":"Maior que 20."
+                "id":"paragraph",
+                "type":"p",
+                "value":"Descrição de um elemento."
             },
             {
-                "type":"custom",
-                "args":["lastName"],
-                "params":["{lastName}"],
-                "body":"return lastName !== value",
-                "msg":"Nome Igual Sobrenome"
+                "id":"hiddenContent",
+                "type":"p",
+                "value":"Valor que so aparece .",
+                "hidden":{
+                    "args":["selected","value"],
+                    "params":["{select1}", "great"],
+                    "body":"return selected == value"
+                }
+            },
+            {
+                "type":"fragment",
+                "value":"Texto solto."
+            },
+            {
+                "type":"img",
+                "src":"/img/tt.jpg"
+            },
+            {  
+                "id":"firstName",
+                "name":"firstName",
+                "type":"text",
+                "className": "form-control",
+                "value":"Cleverson",
+                "validation":{
+                    "output":"firstNameError",
+                    "validators":[{
+                        "type":"required",
+                        "msg":"Campo obrigatório."
+                    },
+                    {
+                        "type":"minLength",
+                        "params":[8],
+                        "msg":"Menor que 8."
+                    },
+                    {
+                        "type":"maxLength",
+                        "params":[20],
+                        "msg":"Maior que 20."
+                    },
+                    {
+                        "type":"custom",
+                        "args":["lastName"],
+                        "params":["{lastName}"],
+                        "body":"return lastName !== value",
+                        "msg":"Nome Igual Sobrenome"
+                    }]
+                }
+            },
+            {
+                "id":"firstNameErrorSpan",
+                "type":"span",
+                "value":"{firstNameError}"
+            },
+            {
+                "type":"br"
+            },
+            {  
+                "id":"lastName",
+                "name":"lastName",
+                "type":"text",
+                "placeholder":"Escolha seu curso",
+                "onBlur":"f1",
+                "onFocus":"f2",
+                "value":"Martins Biora",
+                "hidden":{
+                    "args":["selected","value"],
+                    "params":["{select1}", "great"],
+                    "body":"return selected == value"
+                },
+                "validation":{
+                    "output":"emailError",
+                    "validators":[{
+                        "type":"required",
+                        "msg":"Campo obrigatório."
+                    },
+                    {
+                        "type":"pattern",
+                        "params":["(\\w+)\\s(\\w+)"],
+                        "msg":"Inválido."
+                    }]
+                }
+            },
+            {  
+                "id":"email",
+                "name":"email",
+                "type":"text",
+                "className": "form-control",
+                "value":"",
+                "validation":{
+                    "output":"emailError",
+                    "validators":[{
+                        "type":"required",
+                        "msg":"Campo obrigatório."
+                    },
+                    {
+                        "type":"email",
+                        "msg":"Email inválido."
+                    }]
+                }
+            },
+            {
+                "id":"emailErrorSpan",
+                "type":"span",
+                "value":"{emailError}"
+            },
+            {  
+                "id":"description",
+                "name":"description",
+                "type":"textarea",
+                "value":"Texto Area"
+            },
+            {  
+                "id":"radio1",
+                "name":"radio",
+                "type":"radio",
+                "value":"1"
+            },
+            {  
+                "id":"radio2",
+                "name":"radio",
+                "type":"radio",
+                "value":"2"
+            },
+            {  
+                "id":"select1",
+                "name":"select1",
+                "type":"select",
+                "value":"good",
+                "options":[  
+                    {  
+                    "value":"",
+                    "label":"Selecione"
+                    },
+                    {  
+                    "value":"solid",
+                    "label":"Solid"
+                    },
+                    {  
+                    "value":"great",
+                    "label":"Great"
+                    },
+                    {  
+                    "value":"good",
+                    "label":"Good"
+                    },
+                    {  
+                    "value":"unproven",
+                    "label":"Unproven"
+                    }
+                ]
+            },
+            {  
+                "id":"select2",
+                "name":"select2",
+                "type":"select",
+                "value":"",
+                "options":[  
+                    {  
+                    "value":"",
+                    "label":"Selecione"
+                    }
+                ],
+                "load":{  
+                        "apiUrl":"https://integracaobancariaapi.uninter.com/v1/banco",
+                        "method":"GET",
+                        "headers":{
+                                "Content-Type":"application/json",
+                                "X-Custom-Header": "ProcessThisImmediately",
+                                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M"
+                        },
+                        "valueField":"id",
+                        "labelField":"nome",
+                        "root":"data",
+                        "override":false
+                }
+            },
+            {  
+                "id":"select3",
+                "name":"select3",
+                "type":"select",
+                "value":"2",
+                "options":[  
+                    {  
+                    "value":"",
+                    "label":"Selecione"
+                    }
+                ],
+                "load":{  
+                        "apiUrl":"https://integracaobancariaapi.uninter.com/v1/banco?id={select2}",
+                        "method":"GET",
+                        "headers":{
+                                "Content-Type":"application/json",
+                                "X-Custom-Header": "ProcessThisImmediately",
+                                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M"
+                        },
+                        "trigger":"select2",
+                        "emptyLoad":false,
+                        "valueField":"id",
+                        "labelField":"nome",
+                        "root":"data"
+                }
+            },
+            {  
+                "id":"select4",
+                "name":"select4",
+                "type":"select",
+                "value":"",
+                "options":[  
+                    {  
+                    "value":"",
+                    "label":"Selecione"
+                    }
+                ],
+                "load":{  
+                        "apiUrl":"https://jsonplaceholder.typicode.com/posts",
+                        "method":"POST",
+                        "body":"{\"data\":[{\"id\":1,\"nome\":\"amendoim\"},{\"id\":2,\"nome\":\"hipopotamo\"},{\"id\":3,\"nome\":\"plutonio\"}]}",
+                        "headers":{
+                                "Content-Type":"application/json",
+                                "X-Custom-Header": "ProcessThisImmediately",
+                                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M"
+                        },
+                        "valueField":"id",
+                        "labelField":"nome",
+                        "root":"data",
+                        "override":true
+                }
+            },
+            {  
+                "id":"btnSubmit",
+                "type":"submit",
+                "value":"Enviar",
+                "className": "btn btn-default"
             }]
-        }
+        }]
     },
     {
-        "id":"firstNameErrorSpan",
-        "type":"span",
-        "value":"{firstNameError}"
-    },
-    {
-        "type":"br"
-    },
-    {  
-        "id":"lastName",
-        "name":"lastName",
-        "type":"text",
-        "placeholder":"Escolha seu curso",
-        "onBlur":"f1",
-        "onFocus":"f2",
-        "value":"Martins Biora",
-        "hidden":{
-            "args":["selected","value"],
-            "params":["{select1}", "great"],
-            "body":"return selected == value"
-        },
-        "validation":{
-            "output":"emailError",
-            "validators":[{
-                "type":"required",
-                "msg":"Campo obrigatório."
+        "id":"emailForm",
+        "type":"form",
+        "method":"get",
+        "async":false,
+        "onResult":"f3",
+        "action":"https://jsonplaceholder.typicode.com/posts/42",
+        "className":"form",
+        "controls":[
+            {  
+                "id":"email2",
+                "name":"email2",
+                "type":"text",
+                "className": "form-control",
+                "value":"",
+                "validation":{
+                    "output":"emailError2",
+                    "validators":[{
+                        "type":"required",
+                        "msg":"Campo obrigatório."
+                    },
+                    {
+                        "type":"email",
+                        "msg":"Email inválido."
+                    }]
+                }
             },
             {
-                "type":"pattern",
-                "params":["(\\w+)\\s(\\w+)"],
-                "msg":"Inválido."
-            }]
-        }
-    },
-    {  
-        "id":"email",
-        "name":"email",
-        "type":"text",
-        "className": "form-control",
-        "value":"",
-        "validation":{
-            "output":"emailError",
-            "validators":[{
-                "type":"required",
-                "msg":"Campo obrigatório."
-            },
-            {
-                "type":"email",
-                "msg":"Email inválido."
-            }]
-        }
-    },
-    {
-        "id":"emailErrorSpan",
-        "type":"span",
-        "value":"{emailError}"
-    },
-    {  
-        "id":"description",
-        "name":"description",
-        "type":"textarea",
-        "value":"Texto Area"
-    },
-    {  
-        "id":"radio1",
-        "name":"radio",
-        "type":"radio",
-        "value":"1"
-    },
-    {  
-        "id":"radio2",
-        "name":"radio",
-        "type":"radio",
-        "value":"2"
-    },
-    {  
-        "id":"select1",
-        "name":"select1",
-        "type":"select",
-        "value":"good",
-        "options":[  
-            {  
-               "value":"",
-               "label":"Selecione"
+                "id":"emailErrorSpan2",
+                "type":"span",
+                "value":"{emailError2}"
             },
             {  
-               "value":"solid",
-               "label":"Solid"
-            },
-            {  
-               "value":"great",
-               "label":"Great"
-            },
-            {  
-               "value":"good",
-               "label":"Good"
-            },
-            {  
-               "value":"unproven",
-               "label":"Unproven"
+                "id":"btnSubmit2",
+                "type":"submit",
+                "value":"Enviar",
+                "className": "btn btn-default"
             }
-         ]
-    },
-    {  
-        "id":"select2",
-        "name":"select2",
-        "type":"select",
-        "value":"",
-        "options":[  
-            {  
-               "value":"",
-               "label":"Selecione"
-            }
-         ],
-         "load":{  
-                  "apiUrl":"https://integracaobancariaapi.uninter.com/v1/banco",
-                  "method":"GET",
-                  "headers":{
-                        "Content-Type":"application/json",
-                        "X-Custom-Header": "ProcessThisImmediately",
-                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M"
-                  },
-                  "valueField":"id",
-                  "labelField":"nome",
-                  "root":"data",
-                  "override":false
-        }
-    },
-    {  
-        "id":"select3",
-        "name":"select3",
-        "type":"select",
-        "value":"2",
-        "options":[  
-            {  
-               "value":"",
-               "label":"Selecione"
-            }
-         ],
-         "load":{  
-                  "apiUrl":"https://integracaobancariaapi.uninter.com/v1/banco?id={select2}",
-                  "method":"GET",
-                  "headers":{
-                        "Content-Type":"application/json",
-                        "X-Custom-Header": "ProcessThisImmediately",
-                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M"
-                  },
-                  "trigger":"select2",
-                  "emptyLoad":false,
-                  "valueField":"id",
-                  "labelField":"nome",
-                  "root":"data"
-        }
-    },
-    {  
-        "id":"select4",
-        "name":"select4",
-        "type":"select",
-        "value":"",
-        "options":[  
-            {  
-               "value":"",
-               "label":"Selecione"
-            }
-         ],
-         "load":{  
-                  "apiUrl":"https://jsonplaceholder.typicode.com/posts",
-                  "method":"POST",
-                  "body":"{\"data\":[{\"id\":1,\"nome\":\"amendoim\"},{\"id\":2,\"nome\":\"hipopotamo\"},{\"id\":3,\"nome\":\"plutonio\"}]}",
-                  "headers":{
-                        "Content-Type":"application/json",
-                        "X-Custom-Header": "ProcessThisImmediately",
-                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RtYXMgSW50ZXJub3MiLCJzaWQiOiI2MWZjZGY1Yi02MGJkLTQxYTgtYTM1NS03ZTEzOWUwZjlkMzMiLCJQZXNzb2FJZCI6Ii0xIiwianRpIjoiN2M0YmRjMDktMTBjOC00ZjE1LTg3NWItYjNmOWMzZDYwOGY2IiwiaWF0IjoxNTQ2MDEzNTI1LCJuYmYiOjE1NDYwMTM1MjQsImV4cCI6MTg2MTM3MzUyNCwiaXNzIjoicHJhQ0B1cHJVYnIyIiwiYXVkIjoidGVjPUJVVjhzd3UqIn0.jpZW7Tjbjl2WIaD0QCuY-CWdzorlJE9Jmqz7DSwWQ9M"
-                  },
-                  "valueField":"id",
-                  "labelField":"nome",
-                  "root":"data",
-                  "override":true
-        }
-    },
-    {  
-        "id":"btnSubmit",
-        "type":"submit",
-        "value":"Enviar",
-        "className": "btn btn-default"
+        ]
     }]
-}]
 }

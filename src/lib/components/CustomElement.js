@@ -16,6 +16,7 @@ class CustomElement extends Component {
             controls,
             value,
             dispatch,
+            formId,
             ...inputProps
         } = this.props;
         if(hidden && values){ 
@@ -33,7 +34,7 @@ class CustomElement extends Component {
                     return (
                         <BaseForm {...inputProps}>
                             {controls ? 
-                            (controls.map(control => <SchemaField key={control.id} {...control} />)) :(null)}
+                            (controls.map(control => <SchemaField formId={inputProps.id} key={control.id} {...control} />)) :(null)}
                         </BaseForm>
                     );
                 case 'fragment':
@@ -41,7 +42,7 @@ class CustomElement extends Component {
                         <React.Fragment>
                             <Value value={value} />
                             {controls ? 
-                            (controls.map(control => <SchemaField key={control.id} {...control} />)) :(null)}
+                            (controls.map(control => <SchemaField formId={formId} key={control.id} {...control} />)) :(null)}
                         </React.Fragment>
                     );
                 default:
@@ -51,7 +52,7 @@ class CustomElement extends Component {
                             <CustomTag {...inputProps}>
                                 <Value value={value} />
                                 {controls ? 
-                                (controls.map((control, i) => <SchemaField key={i} {...control} />)) :(null)}
+                                (controls.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
                             </CustomTag>
                         );
                     }else{ 

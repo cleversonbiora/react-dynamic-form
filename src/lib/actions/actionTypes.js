@@ -2,5 +2,6 @@ export const CHANGE_VALUE = 'CHANGE_VALUE';
 export const UPDATE_STATE = 'UPDATE_STATE';
 export const UPDATE_FUNC_STATE = 'UPDATE_FUNC_STATE';
 export const ADD_VALUE = 'ADD_VALUE';
+export const ADD_FORM = 'ADD_FORM';
 export const ADD_VALIDATION = 'ADD_VALIDATION';
 export const CHANGE_VALIDATION = 'CHANGE_VALIDATION';
