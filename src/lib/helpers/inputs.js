@@ -5,7 +5,7 @@ export function isControlledComponent(type){
         case 'color':
         case 'date':
         case 'datetime-local':
-        case 'email ':
+        case 'email':
         case 'file':
         case 'hidden':
         case 'image':

@@ -116,7 +116,6 @@ class BaseInput extends Component {
       formContext,
       registry,
       rawErrors,
-      className,
       addFormValue,
       addValidationValue,
       changeFormValue,
@@ -124,7 +123,7 @@ class BaseInput extends Component {
       addValidator,
       formId
     } = _props,
-          inputProps = _objectWithoutProperties(_props, ['values', 'hidden', 'functions', 'validation', 'load', 'value', 'readonly', 'disabled', 'autofocus', 'onBlur', 'onFocus', 'onChange', 'options', 'schema', 'formContext', 'registry', 'rawErrors', 'className', 'addFormValue', 'addValidationValue', 'changeFormValue', 'changeValidationValue', 'addValidator', 'formId']);
+          inputProps = _objectWithoutProperties(_props, ['values', 'hidden', 'functions', 'validation', 'load', 'value', 'readonly', 'disabled', 'autofocus', 'onBlur', 'onFocus', 'onChange', 'options', 'schema', 'formContext', 'registry', 'rawErrors', 'addFormValue', 'addValidationValue', 'changeFormValue', 'changeValidationValue', 'addValidator', 'formId']);
     inputProps.type = inputProps.type || "text";
     const _onChange = ({ target: { value } }) => {
       if (onChange) this.onChangeFunc(value);

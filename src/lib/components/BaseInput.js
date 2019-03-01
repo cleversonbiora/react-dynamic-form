@@ -127,7 +127,6 @@ class BaseInput extends Component {
         formContext,
         registry,
         rawErrors,
-        className,
         addFormValue,
         addValidationValue,
         changeFormValue,
