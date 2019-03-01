@@ -8,8 +8,8 @@ class App extends Component {
 
   render() {
     var funcs = {
-      f1: function(value) { console.log('Value');},
-      f2: function() {console.log('Amendoim Torrado');},
+      f1: function(value) { console.log('Call F1');},
+      f2: function() {console.log('Call F2');},
       f3:function(value) {console.log(value);}
     };
 

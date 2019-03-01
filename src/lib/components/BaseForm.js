@@ -12,6 +12,8 @@ class BaseForm extends Component {
            this._onSubmit = this.props.functions[this.props.onSubmitFunc].bind();
         if(this.props.onResult)
             this._onResult = this.props.functions[this.props.onResult].bind();
+        if(this.props.onError)
+            this._onError = this.props.functions[this.props.onError].bind();
     }
     
     render() {
@@ -20,6 +22,7 @@ class BaseForm extends Component {
             validations,
             validators,
             onResult,
+            onError,
             onSubmitFunc,
             changeFormValue,
             changeValidationValue,
@@ -51,8 +54,10 @@ class BaseForm extends Component {
                         if(newValidations){
                             var invalid = newValidations.some((item) => item.valid === false);
                             if(invalid){
-                                alert('Invalid');
-                                return;
+                                if(this.props.onError)
+                                    this._onError();
+                                else
+                                    console.log('Invalid');
                             }
                         }
                         if(onSubmitFunc){
@@ -79,20 +84,39 @@ class BaseForm extends Component {
                 </form>
             );
         }
-        const _onSubmit = (event) => {
-            if(validations){
-                var vldts = Object.keys(validations).map(function(e) { return validations[e] })
-                var invalid = vldts.some((item) => item.valid === false);
-                if(invalid){
-                    event.preventDefault();
-                    alert('Invalid');
-                    return false;
-                }
+        const _onSubmit = async (event) => {
+            event.preventDefault();
+            let result = true;
+            if(validators){
+                var promises = Object.keys(validators[inputProps.id]).map(function(e) { 
+                    return getValidation(validators[inputProps.id][e], values[inputProps.id][e], values[inputProps.id])
+                });
+                result = await Promise.all(promises)
+                        .then(data => {
+                            return data.map(([output, valid, value]) => {
+                                changeValidationValue({key:output, valid: valid, value:value});
+                                return {key:output, valid: valid, value:value};
+                            });
+                        }).then((newValidations) => {
+                            if(newValidations){
+                                var invalid = newValidations.some((item) => item.valid === false);
+                                if(invalid){
+                                    if(this.props.onError)
+                                        this._onError();
+                                    else
+                                        console.log('Invalid');
+                                    return false;
+                                }
+                            }
+                            return true
+                        });
             }
-            return true;
+            if(result)
+                document.querySelector('#' + inputProps.id).submit()
+            return result;
         }
         return (
-            <form onSubmit={_onSubmit} 
+            <form onSubmit={_onSubmit.bind(this)} 
                   {...inputProps}>
             </form>
         );

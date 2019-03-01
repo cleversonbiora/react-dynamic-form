@@ -6,8 +6,10 @@
         "id":"mainForm",
         "type":"form",
         "method":"get",
-        "async":true,
+        "target":"_blank",
+        "async":false,
         "onResult":"f3",
+        "onError":"f2",
         "action":"https://jsonplaceholder.typicode.com/posts/42",
         "className":"form",
         "controls":[
@@ -131,7 +133,7 @@
                 "name":"email",
                 "type":"text",
                 "className": "form-control",
-                "value":"",
+                "value":"tt@tt.com",
                 "validation":{
                     "output":"emailError",
                     "validators":[{

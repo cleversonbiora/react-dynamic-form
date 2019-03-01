@@ -5,8 +5,8 @@ class CustomDiv extends Component {
 
   render() {
     return (
-      <div style={{"backgroundColor":"red"}} >
-        Amendoim Torrado
+      <div style={{"backgroundColor":"#dedede"}} >
+        Injeted Component
       </div>
     );
   }
