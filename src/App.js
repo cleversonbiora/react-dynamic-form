@@ -19,7 +19,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <DynamicPage form={formJson} functions={funcs} customComponents={Components}/>
+        <DynamicPage form={formJson} />
       </div>
     );
   }
