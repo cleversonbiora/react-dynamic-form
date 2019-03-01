@@ -7,9 +7,14 @@ import { updateFormState, updateFuncState, updateComponentState } from './action
 class DynamicPage extends Component {
   constructor(props) {
     super(props);
-    props.updateFormState(this.props.form);
-    props.updateFuncState(this.props.functions);
-    props.updateComponentState(this.props.customComponents);
+    if(this.props.form)
+      props.updateFormState(this.props.form);
+    else
+      console.warn("You must hade set a form!")
+    if(this.props.functions)
+      props.updateFuncState(this.props.functions);
+    if(this.props.customComponents)
+      props.updateComponentState(this.props.customComponents);
   }
   
   render() {

@@ -2,7 +2,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 import { ADD_VALUE, CHANGE_VALUE, ADD_FORM } from '../actions/actionTypes';
 
-export const valueReducer = (state = JSON.parse('{}'), action) => {
+export const valueReducer = (state = {}, action) => {
   switch (action.type) {
     case ADD_FORM:
       return _extends({}, state, {

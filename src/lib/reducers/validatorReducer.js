@@ -1,6 +1,6 @@
 import { ADD_VALIDATOR, ADD_FORM } from '../actions/actionTypes';
 
-export const validatorReducer = (state = JSON.parse('{}'), action) => {
+export const validatorReducer = (state = {}, action) => {
   switch (action.type) {
     case ADD_FORM:
       return{

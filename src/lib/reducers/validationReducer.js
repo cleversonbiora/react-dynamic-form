@@ -1,6 +1,6 @@
 import { ADD_VALIDATION, CHANGE_VALIDATION } from '../actions/actionTypes';
 
-export const validationReducer = (state = JSON.parse('{}'), action) => {
+export const validationReducer = (state = {}, action) => {
   switch (action.type) {
     case ADD_VALIDATION:
       return{
