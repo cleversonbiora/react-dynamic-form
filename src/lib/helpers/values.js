@@ -38,3 +38,12 @@ export function mergeValues(values){
         mergedValues = Object.assign(...forms);
     return mergedValues;
 }
+
+export function isUpperCase(str)
+{
+   let regexp = /^[A-Z]/;
+   if (regexp.test(str))
+        return true;
+    else
+        return false;
+}

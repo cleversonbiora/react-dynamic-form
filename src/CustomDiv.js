@@ -5,7 +5,7 @@ class CustomDiv extends Component {
 
   render() {
     return (
-      <div style={{"background-color":"red"}} >
+      <div style={{"backgroundColor":"red"}} >
         Amendoim Torrado
       </div>
     );

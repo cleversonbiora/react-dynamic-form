@@ -5,12 +5,14 @@ import BaseForm from './BaseForm';
 import Value from './Value';
 import SchemaField from './SchemaField';
 import {isVoidElement} from '../helpers/inputs';
+import {isUpperCase} from '../helpers/values';
 
 class CustomElement extends Component {
 
     render() {
         const {
             values,
+            components,
             hidden,
             type,
             controls,
@@ -47,14 +49,24 @@ class CustomElement extends Component {
                     );
                 default:
                     if(type){
-                        const CustomTag = `${type}`;
-                        return (
-                            <CustomTag {...inputProps}>
-                                <Value value={value} />
-                                {controls ? 
-                                (controls.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
-                            </CustomTag>
-                        );
+                        if(isUpperCase(`${type}`) && components[`${type}`]){
+                            const CustomTag = components[`${type}`];
+                            return (
+                                <CustomTag value={value} {...inputProps}>
+                                    {controls ? 
+                                    (controls.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
+                                </CustomTag>
+                            );
+                        }else{
+                            const CustomTag = `${type}`;
+                            return (
+                                <CustomTag {...inputProps}>
+                                    <Value value={value} />
+                                    {controls ? 
+                                    (controls.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
+                                </CustomTag>
+                            );
+                        }
                     }else{ 
                         return null
                     }
@@ -64,6 +76,7 @@ class CustomElement extends Component {
 }
 
   const mapStateToProps = (store) => ({
-    values: store.dynamicFormState.valueState
+    values: store.dynamicFormState.valueState,
+    components:store.dynamicFormState.componentState
   });
   export default connect(mapStateToProps)(CustomElement);

@@ -21,15 +21,19 @@ class BaseInput extends Component {
         if(this.props.onFocus)
           this._onFocus = props.functions[props.onFocus].bind();
         if(this.props.onBlur)
-          this._onBlur = props.functions[props.onBlur].bind();
-        if(this.props.validation){
-          this._onBlur = () => {
-            getValidation(this.props.validation,this.state.value, this.props.values[this.props.formId])
-              .then(([output, valid, value]) => {
-                  this.props.changeValidationValue({key:output, valid: valid, value:value});
-                });
-          };
-        }
+          this.onBlurFunc = props.functions[props.onBlur].bind();
+        if(this.props.onChange)
+          this.onChangeFunc = props.functions[props.onChange].bind();
+        this._onBlur = () => {
+          if(this.props.onBlur)
+            this.onBlurFunc();
+          if(this.props.validation){
+              getValidation(this.props.validation,this.state.value, this.props.values[this.props.formId])
+                .then(([output, valid, value]) => {
+                    this.props.changeValidationValue({key:output, valid: valid, value:value});
+                  });
+          }
+        };
     }
     componentDidUpdate(prevProps) {
       if (this.props.load && getFormValue(this.props.formId, this.props.id, this.props.values) !== getFormValue(prevProps.formId, prevProps.id, prevProps.values) ) {
@@ -134,6 +138,8 @@ class BaseInput extends Component {
       } = this.props;
       inputProps.type = inputProps.type || "text";
       const _onChange = ({ target: { value } }) => {
+        if(onChange)
+          this.onChangeFunc(value);
         this.setState({value: value});
         return changeFormValue({key:this.props.id, value:value});
       };

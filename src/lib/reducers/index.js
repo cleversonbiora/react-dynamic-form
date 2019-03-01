@@ -3,6 +3,7 @@ import { valueReducer } from './valueReducer';
 import { validationReducer } from './validationReducer';
 import { validatorReducer } from './validatorReducer';
 import { funcReducer } from './funcReducer';
+import { componentReducer } from './componentReducer';
 import { combineReducers } from 'redux';
 
 export const Reducers = combineReducers({
@@ -10,5 +11,6 @@ export const Reducers = combineReducers({
   funcState: funcReducer,
   valueState: valueReducer,
   validationState: validationReducer,
-  validatorState: validatorReducer
+  validatorState: validatorReducer,
+  componentState: componentReducer
 });

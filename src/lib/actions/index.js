@@ -1,4 +1,4 @@
-import { CHANGE_VALUE, ADD_FORM, UPDATE_STATE, ADD_VALUE, UPDATE_FUNC_STATE, CHANGE_VALIDATION, ADD_VALIDATION, ADD_VALIDATOR } from './actionTypes';
+import {UPDATE_COMP_STATE, CHANGE_VALUE, ADD_FORM, UPDATE_STATE, ADD_VALUE, UPDATE_FUNC_STATE, CHANGE_VALIDATION, ADD_VALIDATION, ADD_VALIDATOR } from './actionTypes';
 
 export const changeFormValue = value => ({
   type: CHANGE_VALUE,
@@ -30,5 +30,9 @@ export const updateFormState = value => ({
 });
 export const updateFuncState = value => ({
   type: UPDATE_FUNC_STATE,
+  json: value
+});
+export const updateComponentState = value => ({
+  type: UPDATE_COMP_STATE,
   json: value
 });

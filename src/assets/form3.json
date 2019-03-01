@@ -101,6 +101,7 @@
                 "placeholder":"Escolha seu curso",
                 "onBlur":"f1",
                 "onFocus":"f2",
+                "onChange":"f3",
                 "value":"Martins Biora",
                 "hidden":{
                     "args":["selected","value"],

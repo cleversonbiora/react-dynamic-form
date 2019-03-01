@@ -1,4 +1,4 @@
-import DynamicForm from "./DynamicForm";
+import DynamicPage from "./DynamicPage";
 import { Reducers } from './reducers';
 
-export { DynamicForm, Reducers };
+export { DynamicPage, Reducers };
