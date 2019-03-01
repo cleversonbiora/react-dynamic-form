@@ -1,5 +1,5 @@
-# react-dynamic-form
-A library of React components created using `create-react-app`.
+# react-json-page
+This is a React lib to generate pages and forms based in json files.
 ## Installation
 Run the following command:
-`npm install react-dynamic-form`
+`npm install react-json-page`

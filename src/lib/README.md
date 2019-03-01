@@ -1,5 +1,5 @@
 # react-json-page
-A library of React components created using `create-react-app`.
+This is a React lib to generate pages and forms based in json files.
 ## Installation
 Run the following command:
 `npm install react-json-page`

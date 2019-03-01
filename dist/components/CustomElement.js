@@ -9,6 +9,7 @@ import BaseForm from './BaseForm';
 import Value from './Value';
 import SchemaField from './SchemaField';
 import { isVoidElement } from '../helpers/inputs';
+import { isUpperCase } from '../helpers/values';
 
 class CustomElement extends Component {
 
@@ -16,13 +17,15 @@ class CustomElement extends Component {
         const _props = this.props,
               {
             values,
+            components,
             hidden,
             type,
             controls,
             value,
-            dispatch
+            dispatch,
+            formId
         } = _props,
-              inputProps = _objectWithoutProperties(_props, ["values", "hidden", "type", "controls", "value", "dispatch"]);
+              inputProps = _objectWithoutProperties(_props, ["values", "components", "hidden", "type", "controls", "value", "dispatch", "formId"]);
         if (hidden && values) {
             if (execFunc(hidden, values)) return null;
         }
@@ -35,24 +38,33 @@ class CustomElement extends Component {
                     return React.createElement(
                         BaseForm,
                         inputProps,
-                        controls ? controls.map(control => React.createElement(SchemaField, _extends({ key: control.id }, control))) : null
+                        controls ? controls.map(control => React.createElement(SchemaField, _extends({ formId: inputProps.id, key: control.id }, control))) : null
                     );
                 case 'fragment':
                     return React.createElement(
                         React.Fragment,
                         null,
                         React.createElement(Value, { value: value }),
-                        controls ? controls.map(control => React.createElement(SchemaField, _extends({ key: control.id }, control))) : null
+                        controls ? controls.map(control => React.createElement(SchemaField, _extends({ formId: formId, key: control.id }, control))) : null
                     );
                 default:
                     if (type) {
-                        const CustomTag = `${type}`;
-                        return React.createElement(
-                            CustomTag,
-                            inputProps,
-                            React.createElement(Value, { value: value }),
-                            controls ? controls.map((control, i) => React.createElement(SchemaField, _extends({ key: i }, control))) : null
-                        );
+                        if (isUpperCase(`${type}`) && components[`${type}`]) {
+                            const CustomTag = components[`${type}`];
+                            return React.createElement(
+                                CustomTag,
+                                _extends({ value: value }, inputProps),
+                                controls ? controls.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
+                            );
+                        } else {
+                            const CustomTag = `${type}`;
+                            return React.createElement(
+                                CustomTag,
+                                inputProps,
+                                React.createElement(Value, { value: value }),
+                                controls ? controls.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
+                            );
+                        }
                     } else {
                         return null;
                     }
@@ -62,6 +74,7 @@ class CustomElement extends Component {
 }
 
 const mapStateToProps = store => ({
-    values: store.dynamicFormState.valueState
+    values: store.dynamicFormState.valueState,
+    components: store.dynamicFormState.componentState
 });
 export default connect(mapStateToProps)(CustomElement);

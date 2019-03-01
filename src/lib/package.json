@@ -1,6 +1,6 @@
 {
   "name": "react-json-page",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A simple and small lib to render html form based in json.",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,9 @@
     "redux",
     "dynamic",
     "dynamic-form",
-    "json"
+    "json",
+    "dynamic page",
+    "page"
   ],
   "author": "Cleverson Biora",
   "license": "ISC",
