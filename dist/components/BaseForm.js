@@ -12,9 +12,9 @@ class BaseForm extends Component {
     constructor(props) {
         super(props);
         props.addForm(props.id);
-        if (this.props.onSubmitFunc) this._onSubmit = this.props.functions[this.props.onSubmitFunc].bind();
-        if (this.props.onResult) this._onResult = this.props.functions[this.props.onResult].bind();
-        if (this.props.onError) this._onError = this.props.functions[this.props.onError].bind();
+        if (this.props.onSubmitFunc && this.props.functions[this.props.onSubmitFunc]) this._onSubmit = this.props.functions[this.props.onSubmitFunc].bind();
+        if (this.props.onResult && this.props.functions[this.props.onResult]) this._onResult = this.props.functions[this.props.onResult].bind();
+        if (this.props.onError && this.props.functions[this.props.onError]) this._onError = this.props.functions[this.props.onError].bind();
     }
 
     render() {

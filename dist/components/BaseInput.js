@@ -22,9 +22,9 @@ class BaseInput extends Component {
       optionsList: props.options,
       value: props.value
     };
-    if (this.props.onFocus) this._onFocus = props.functions[props.onFocus].bind();
-    if (this.props.onBlur) this.onBlurFunc = props.functions[props.onBlur].bind();
-    if (this.props.onChange) this.onChangeFunc = props.functions[props.onChange].bind();
+    if (this.props.onFocus && props.functions[props.onFocus]) this._onFocus = props.functions[props.onFocus].bind();
+    if (this.props.onBlur && props.functions[props.onBlur]) this.onBlurFunc = props.functions[props.onBlur].bind();
+    if (this.props.onChange && props.functions[props.onChange]) this.onChangeFunc = props.functions[props.onChange].bind();
     this._onBlur = () => {
       if (this.props.onBlur) this.onBlurFunc();
       if (this.props.validation) {

@@ -10,7 +10,7 @@ class DynamicPage extends Component {
     if(this.props.form)
       props.updateFormState(this.props.form);
     else
-      console.warn("You must hade set a form!")
+      console.warn("react-json-page: You must set a form! <DynamicPage form={formJson} />")
     if(this.props.functions)
       props.updateFuncState(this.props.functions);
     if(this.props.customComponents)
