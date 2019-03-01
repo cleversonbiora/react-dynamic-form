@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import formJson from './assets/form3.json';
+import formJson from './assets/form.json';
 import {DynamicPage} from './lib'
 import CustomDiv from './CustomDiv';
 

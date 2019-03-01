@@ -1,5 +1,5 @@
 {
-  "name": "react-dynamic-form",
+  "name": "react-json-page",
   "version": "0.1.0",
   "dependencies": {
     "react-redux": "^6.0.0",
@@ -38,6 +38,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/cleversonbiora/react-dynamic-form"
+    "url": "https://github.com/cleversonbiora/react-json-page"
   }
 }
