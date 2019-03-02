@@ -4,6 +4,18 @@ This is a React lib to generate pages and forms based in json files.
 
 ## Getting Started
 
+### Features
+
+* Redering HTML from JSON.
+* Dynamic Forms
+* Basic Form Validation
+* Async Form Validation
+* Logical Input Hiddden
+* Async Form Post
+* Inject External Components and Functions
+
+### Code Example
+
 In this exemple, we’ll build an simple form using only JSON.
 Also, you can download the project and excute a more complete example using `npm start`.
 
