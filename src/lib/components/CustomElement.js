@@ -15,7 +15,7 @@ class CustomElement extends Component {
             components,
             hidden,
             type,
-            controls,
+            children,
             value,
             dispatch,
             formId,
@@ -35,16 +35,16 @@ class CustomElement extends Component {
                 case 'form':
                     return (
                         <BaseForm {...inputProps}>
-                            {controls ? 
-                            (controls.map(control => <SchemaField formId={inputProps.id} key={control.id} {...control} />)) :(null)}
+                            {children ? 
+                            (children.map(control => <SchemaField formId={inputProps.id} key={control.id} {...control} />)) :(null)}
                         </BaseForm>
                     );
                 case 'fragment':
                     return (
                         <React.Fragment>
                             <Value value={value} />
-                            {controls ? 
-                            (controls.map(control => <SchemaField formId={formId} key={control.id} {...control} />)) :(null)}
+                            {children ? 
+                            (children.map(control => <SchemaField formId={formId} key={control.id} {...control} />)) :(null)}
                         </React.Fragment>
                     );
                 default:
@@ -53,8 +53,8 @@ class CustomElement extends Component {
                             const CustomTag = components[`${type}`];
                             return (
                                 <CustomTag value={value} {...inputProps}>
-                                    {controls ? 
-                                    (controls.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
+                                    {children ? 
+                                    (children.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
                                 </CustomTag>
                             );
                         }else{
@@ -62,8 +62,8 @@ class CustomElement extends Component {
                             return (
                                 <CustomTag {...inputProps}>
                                     <Value value={value} />
-                                    {controls ? 
-                                    (controls.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
+                                    {children ? 
+                                    (children.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
                                 </CustomTag>
                             );
                         }

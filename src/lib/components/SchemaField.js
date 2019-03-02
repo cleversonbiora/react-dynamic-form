@@ -7,7 +7,7 @@ class SchemaField extends Component {
   render() {
     const {
         type,
-        controls,
+        children,
         value,
         ...inputProps
     } = this.props;
@@ -17,7 +17,7 @@ class SchemaField extends Component {
         );
     }else{
         return (
-            <CustomElement type={type} value={value} controls={controls} {...inputProps}></CustomElement>
+            <CustomElement type={type} value={value} children={children} {...inputProps}></CustomElement>
         );
     }
   }

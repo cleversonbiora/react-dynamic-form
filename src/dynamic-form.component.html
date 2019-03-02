@@ -3,19 +3,19 @@
 
   <ng-container [ngSwitch]="inputField.controlType" >
     <h1 *ngSwitchCase="'h1'" [class]="inputField.class" [id]="inputField.key">
-      {{formFields.controls[inputField.key].value}}
+      {{formFields.children[inputField.key].value}}
     </h1>
 
     <span *ngSwitchCase="'span'" [class]="inputField.class" [id]="inputField.key">
-      {{formFields.controls[inputField.key].value}}
+      {{formFields.children[inputField.key].value}}
     </span>
 
     <strong *ngSwitchCase="'strong'" [class]="inputField.class" [id]="inputField.key">
-      {{formFields.controls[inputField.key].value}}
+      {{formFields.children[inputField.key].value}}
     </strong>
 
     <a *ngSwitchCase="'anchor'" [id]="inputField.key" [class]="inputField.class" [attr.data-toggle]="inputField.dataToggle" [href]="inputField.href"
-      [attr.role]="inputField.button" [attr.aria-expanded]="inputField.ariaExpanded" [attr.aria-controls]="inputField.ariaControls">
+      [attr.role]="inputField.button" [attr.aria-expanded]="inputField.ariaExpanded" [attr.aria-children]="inputField.ariachildren">
       {{inputField.value}}
     </a>
 

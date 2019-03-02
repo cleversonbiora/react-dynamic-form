@@ -1,7 +1,7 @@
 {
     "id":"mainDiv",
     "type":"div",
-    "controls":[
+    "children":[
     {
         "id":"mainForm",
         "type":"form",
@@ -12,12 +12,12 @@
         "onError":"f2",
         "action":"https://jsonplaceholder.typicode.com/posts/42",
         "className":"form",
-        "controls":[
+        "children":[
         {  
             "id":"mainGroup",
             "type":"div",
             "className":"row",
-            "controls":[{  
+            "children":[{  
                 "id":"titleForm",
                 "type":"h1",
                 "value":"Formulario",
@@ -301,7 +301,7 @@
         "onResult":"f3",
         "action":"https://jsonplaceholder.typicode.com/posts/42",
         "className":"form",
-        "controls":[
+        "children":[
             {  
                 "id":"email2",
                 "name":"email2",
