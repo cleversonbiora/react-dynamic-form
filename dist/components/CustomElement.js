@@ -20,12 +20,12 @@ class CustomElement extends Component {
             components,
             hidden,
             type,
-            controls,
+            children,
             value,
             dispatch,
             formId
         } = _props,
-              inputProps = _objectWithoutProperties(_props, ["values", "components", "hidden", "type", "controls", "value", "dispatch", "formId"]);
+              inputProps = _objectWithoutProperties(_props, ["values", "components", "hidden", "type", "children", "value", "dispatch", "formId"]);
         if (hidden && values) {
             if (execFunc(hidden, values)) return null;
         }
@@ -38,14 +38,14 @@ class CustomElement extends Component {
                     return React.createElement(
                         BaseForm,
                         inputProps,
-                        controls ? controls.map(control => React.createElement(SchemaField, _extends({ formId: inputProps.id, key: control.id }, control))) : null
+                        children ? children.map(control => React.createElement(SchemaField, _extends({ formId: inputProps.id, key: control.id }, control))) : null
                     );
                 case 'fragment':
                     return React.createElement(
                         React.Fragment,
                         null,
                         React.createElement(Value, { value: value }),
-                        controls ? controls.map(control => React.createElement(SchemaField, _extends({ formId: formId, key: control.id }, control))) : null
+                        children ? children.map(control => React.createElement(SchemaField, _extends({ formId: formId, key: control.id }, control))) : null
                     );
                 default:
                     if (type) {
@@ -54,7 +54,7 @@ class CustomElement extends Component {
                             return React.createElement(
                                 CustomTag,
                                 _extends({ value: value }, inputProps),
-                                controls ? controls.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
+                                children ? children.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
                             );
                         } else {
                             const CustomTag = `${type}`;
@@ -62,7 +62,7 @@ class CustomElement extends Component {
                                 CustomTag,
                                 inputProps,
                                 React.createElement(Value, { value: value }),
-                                controls ? controls.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
+                                children ? children.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
                             );
                         }
                     } else {

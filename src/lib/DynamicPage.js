@@ -18,6 +18,8 @@ class DynamicPage extends Component {
   }
   
   render() {
+    if(this.props.form && this.props.live)
+      this.props.updateFormState(this.props.form);
     return(<SchemaField {...this.props.jsonForm}/>);
   }
 }

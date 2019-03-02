@@ -12,14 +12,14 @@ class SchemaField extends Component {
         const _props = this.props,
               {
             type,
-            controls,
+            children,
             value
         } = _props,
-              inputProps = _objectWithoutProperties(_props, ['type', 'controls', 'value']);
+              inputProps = _objectWithoutProperties(_props, ['type', 'children', 'value']);
         if (isControlledComponent(type)) {
             return React.createElement(BaseInput, _extends({ type: type, value: value }, inputProps));
         } else {
-            return React.createElement(CustomElement, _extends({ type: type, value: value, controls: controls }, inputProps));
+            return React.createElement(CustomElement, _extends({ type: type, value: value, children: children }, inputProps));
         }
     }
 }
