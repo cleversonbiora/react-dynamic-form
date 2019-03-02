@@ -105,14 +105,6 @@ import {DynamicPage} from 'react-json-page'
 }
 ```
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
 ### Installing
 
 Run the following command:
@@ -131,7 +123,7 @@ Coming soon I wiil open for submitting pull requests to us.
 
 ## Authors
 
-* **Cleverson Biora** - *Initial work* - [PurpleBooth](https://github.com/cleversonbiora)
+* **Cleverson Biora** - *Initial work* - [CleversonBiora](https://github.com/cleversonbiora)
 
 See also the list of [contributors](https://github.com/cleversonbiora/react-json-page/contributors) who participated in this project.
 
