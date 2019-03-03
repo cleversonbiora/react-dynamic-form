@@ -6,7 +6,7 @@ This is a React lib to generate pages and forms based in json files.
 
 ### Features
 
-* Redering HTML from JSON.
+* Rendering HTML from JSON.
 * Dynamic Forms
 * Basic Form Validation
 * Async Form Validation
@@ -27,9 +27,10 @@ import { createStore } from 'redux';
 import { Reducers } from 'react-json-page';
 import { combineReducers } from 'redux';
 
+
 export const ReducersApp = combineReducers({
     dynamicFormState: Reducers
-    /*YOUR REDUCERS*/
+    /*Combine your reducers with ours, from here*/
 });
 export const Store = createStore(ReducersApp);
 
