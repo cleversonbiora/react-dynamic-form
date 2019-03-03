@@ -1,72 +1,144 @@
-# Table of Contents
+# react-json-page
 
-- [Read Me](../README.md)
-- [Introduction](introduction/README.md)
-  - [Motivation](introduction/Motivation.md)
-  - [Core Concepts](introduction/CoreConcepts.md)
-  - [Three Principles](introduction/ThreePrinciples.md)
-  - [Prior Art](introduction/PriorArt.md)
-  - [Learning Resources](introduction/LearningResources.md)
-  - [Ecosystem](introduction/Ecosystem.md)
-  - [Examples](introduction/Examples.md)
-- [Basics](basics/README.md)
-  - [Actions](basics/Actions.md)
-  - [Reducers](basics/Reducers.md)
-  - [Store](basics/Store.md)
-  - [Data Flow](basics/DataFlow.md)
-  - [Usage with React](basics/UsageWithReact.md)
-  - [Example: Todo List](basics/ExampleTodoList.md)
-- [Advanced](advanced/README.md)
-  - [Async Actions](advanced/AsyncActions.md)
-  - [Async Flow](advanced/AsyncFlow.md)
-  - [Middleware](advanced/Middleware.md)
-  - [Usage with React Router](advanced/UsageWithReactRouter.md)
-  - [Example: Reddit API](advanced/ExampleRedditAPI.md)
-  - [Next Steps](advanced/NextSteps.md)
-- [Recipes](recipes/README.md)
-  - [Configuring Your Store](recipes/ConfiguringYourStore.md)
-  - [Migrating to Redux](recipes/MigratingToRedux.md)
-  - [Using Object Spread Operator](recipes/UsingObjectSpreadOperator.md)
-  - [Reducing Boilerplate](recipes/ReducingBoilerplate.md)
-  - [Server Rendering](recipes/ServerRendering.md)
-  - [Writing Tests](recipes/WritingTests.md)
-  - [Computing Derived Data](recipes/ComputingDerivedData.md)
-  - [Implementing Undo History](recipes/ImplementingUndoHistory.md)
-  - [Isolating Subapps](recipes/IsolatingSubapps.md)
-  - [Structuring Reducers](recipes/structuring-reducers/StructuringReducers.md)
-    - [Prerequisite Concepts](recipes/structuring-reducers/PrerequisiteConcepts.md)
-    - [Basic Reducer Structure](recipes/structuring-reducers/BasicReducerStructure.md)
-    - [Splitting Reducer Logic](recipes/structuring-reducers/SplittingReducerLogic.md)
-    - [Refactoring Reducers Example](recipes/structuring-reducers/RefactoringReducersExample.md)
-    - [Using `combineReducers`](recipes/structuring-reducers/UsingCombineReducers.md)
-    - [Beyond `combineReducers`](recipes/structuring-reducers/BeyondCombineReducers.md)
-    - [Normalizing State Shape](recipes/structuring-reducers/NormalizingStateShape.md)
-    - [Updating Normalized Data](recipes/structuring-reducers/UpdatingNormalizedData.md)
-    - [Reusing Reducer Logic](recipes/structuring-reducers/ReusingReducerLogic.md)
-    - [Immutable Update Patterns](recipes/structuring-reducers/ImmutableUpdatePatterns.md)
-    - [Initializing State](recipes/structuring-reducers/InitializingState.md)
-  - [Using Immutable.JS with Redux](recipes/UsingImmutableJS.md)
-- [FAQ](FAQ.md)
-  - [General](faq/General.md)
-  - [Reducers](faq/Reducers.md)
-  - [Organizing State](faq/OrganizingState.md)
-  - [Store Setup](faq/StoreSetup.md)
-  - [Actions](faq/Actions.md)
-  - [Immutable Data](faq/ImmutableData.md)
-  - [Code Structure](faq/CodeStructure.md)
-  - [Performance](faq/Performance.md)
-  - [Design Decisions](faq/DesignDecisions.md)
-  - [React Redux](faq/ReactRedux.md)
-  - [Miscellaneous](faq/Miscellaneous.md)
-- [Troubleshooting](Troubleshooting.md)
-- [Glossary](Glossary.md)
-- [API Reference](api/README.md)
-  - [createStore](api/createStore.md)
-  - [Store](api/Store.md)
-  - [combineReducers](api/combineReducers.md)
-  - [applyMiddleware](api/applyMiddleware.md)
-  - [bindActionCreators](api/bindActionCreators.md)
-  - [compose](api/compose.md)
-- [Change Log](../CHANGELOG.md)
-- [Patrons](../PATRONS.md)
-- [Feedback](Feedback.md)
+This is a React lib to generate pages and forms based in json files.
+
+## Getting Started
+
+### Features
+
+* Redering HTML from JSON.
+* Dynamic Forms
+* Basic Form Validation
+* Async Form Validation
+* Logical Input Hiddden
+* Async Form Post
+* Inject External Components and Functions
+
+### Code Example
+
+In this exemple, we’ll build an simple form using only JSON.
+Also, you can download the project and excute a more complete example using `npm start`.
+
+`index.js`
+
+```
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { Reducers } from 'react-json-page';
+import { combineReducers } from 'redux';
+
+export const ReducersApp = combineReducers({
+    dynamicFormState: Reducers
+    /*YOUR REDUCERS*/
+});
+export const Store = createStore(ReducersApp);
+
+ReactDOM.render(
+    <Provider store={Store}>
+    <App />
+    </Provider>, document.getElementById('root'));
+```
+
+`App.js`
+
+```
+//ADD IMPORT
+import {DynamicPage} from 'react-json-page'
+
+//ADD COMPONENT
+<DynamicPage form={/*JSON Object*/} />;
+```
+
+`jsonForm.json`
+
+```
+{
+    "id":"mainDiv",
+    "type":"div",
+    "children":[
+    {
+        "id":"mainForm",
+        "type":"form",
+        "className":"form",
+        "children":[
+            {  
+                "id":"titleForm",
+                "type":"h1",
+                "value":"Formulario",
+                "className": "title"
+            },
+            {  
+                "id":"firstName",
+                "name":"firstName",
+                "type":"text",
+                "className": "form-control",
+                "value":"Cleverson",
+                "validation":{
+                    "output":"firstNameError",
+                    "validators":[{
+                        "type":"required",
+                        "msg":"Campo obrigatório."
+                    }]
+                }
+            },
+            {
+                "id":"firstNameErrorSpan",
+                "type":"span",
+                "value":"{firstNameError}"
+            },
+            {
+                "type":"br"
+            },
+            {  
+                "id":"lastName",
+                "name":"lastName",
+                "type":"text",
+                "value":"Biora",
+                "validation":{
+                    "output":"lastNameError",
+                    "validators":[{
+                        "type":"required",
+                        "msg":"Campo obrigatório."
+                    }]
+                }
+            },
+            {
+                "id":"lastNameErrorSpan",
+                "type":"span",
+                "value":"{lastNameError}"
+            },
+            {  
+                "id":"btnSubmit",
+                "type":"submit",
+                "value":"Enviar",
+                "className": "btn btn-default"
+            }]
+    }]
+}
+```
+
+### Installing
+
+Run the following command:
+
+`npm install react-json-page`
+
+
+## Built With
+
+* [React](https://reactjs.org/) - The web library used
+* [Redux](https://redux.js.org/) - State Management
+
+## Contributing
+
+Coming soon I wiil open for submitting pull requests to us.
+
+## Authors
+
+* **Cleverson Biora** - *Initial work* - [CleversonBiora](https://github.com/cleversonbiora)
+
+See also the list of [contributors](https://github.com/cleversonbiora/react-json-page/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License.
