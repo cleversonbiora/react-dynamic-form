@@ -8,7 +8,7 @@ This is a React lib to generate pages and forms based in json files.
 
 * Redering HTML from JSON.
 * Dynamic Forms
-* Basic Form Validation
+* [Basic Form Validation](/BasicValidation)
 * Async Form Validation
 * Logical Input Hiddden
 * Async Form Post
@@ -21,7 +21,7 @@ Also, you can download the project and excute a more complete example using `npm
 
 `index.js`
 
-```
+``` JS
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { Reducers } from 'react-json-page';
@@ -41,7 +41,7 @@ ReactDOM.render(
 
 `App.js`
 
-```
+``` JS
 //ADD IMPORT
 import {DynamicPage} from 'react-json-page'
 
@@ -51,7 +51,7 @@ import {DynamicPage} from 'react-json-page'
 
 `jsonForm.json`
 
-```
+``` JSON
 {
     "id":"mainDiv",
     "type":"div",
