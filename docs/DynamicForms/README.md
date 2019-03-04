@@ -1,53 +1,58 @@
-# Redering HTML from JSON
+# Dynamic Forms
 
-See the example below.
+See the form example below.
 
 ```json
-{  
-            "type":"div",
-            "id":"mainGroup",
-            "type":"div",
-            "className":"row",
-            /* Any other valid HTML attribute */
-            "children":[{  
-                "id":"title",
-                "type":"h1",
-                "value":"Page",
-                "className": "title"
-            },
-            {
-                "type":"p",
-                "style":{"color":"red"},
-                "value":"Hello, {firstName}"
-            },
-            {  
+{
+        "id":"mainForm",
+        "type":"form",
+        "className":"form",
+        "children":[{  
                 "id":"firstName",
                 "name":"firstName",
                 "type":"text",
                 "className": "form-control",
-                "value":"Cleverson"
+                "value":"John",
+                "validation":{
+                    "output":"firstNameError",
+                    "validators":[{
+                        "type":"required",
+                        "msg":"Required."
+                    }]
+                }
+            },
+            {
+                "id":"firstNameErrorSpan",
+                "type":"span",
+                "value":"{firstNameError}"
+            },
+            {
+                "type":"br"
+            },
+            {  
+                "id":"lastName",
+                "name":"lastName",
+                "type":"text",
+                "value":"Chosen",
+                "validation":{
+                    "output":"lastNameError",
+                    "validators":[{
+                        "type":"required",
+                        "msg":"Campo obrigatório."
+                    }]
+                }
+            },
+            {
+                "id":"lastNameErrorSpan",
+                "type":"span",
+                "value":"{lastNameError}"
+            },
+            {  
+                "id":"btnSubmit",
+                "type":"submit",
+                "value":"Send",
+                "className": "btn btn-default"
             }]
 }
 ```
-
-## type
-
-The type accept any HTML tag and [Injected Components](/react-json-page/InjectedComponents).
-
-## id
-
-The is required only for [Controlled Components](https://reactjs.org/docs/forms.html#controlled-components){:target="_blank"}
-
-# attributes
-
-The JSON accept any HTML attribute. Class and anothers attributes with composed name follow the same rules as React.
-
-# value
-
-Values support mustaches tags referencing input's ID and Validation's output.
-
-# children
-
-Provides a array of nested components.
-
 

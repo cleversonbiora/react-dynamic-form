@@ -9,6 +9,7 @@
 * [Async And Custom Form Validation](/react-json-page/CustomValidation)
 * [Logical Input Hiddden](/react-json-page/InputHidden)
 * [Async Form Post](/react-json-page/AsyncPost)
+* [Async Load](/react-json-page/AsyncLoad)
 * [Inject External Components and Functions](/react-json-page/InjectedComponents)
 
 ## Basic Example
