@@ -16,7 +16,7 @@ This is a React lib to generate pages and forms based in json files.
 
 ### Docs
 
-See the [Docs](https://cleversonbiora.github.io/react-json-page/) for exemples and instructions [here](https://cleversonbiora.github.io/react-json-page/) - 
+See the [Docs](https://cleversonbiora.github.io/react-json-page/) for exemples and instructions [here](https://cleversonbiora.github.io/react-json-page/) 
 
 ### Installing
 

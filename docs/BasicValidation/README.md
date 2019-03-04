@@ -2,7 +2,7 @@
 
 The basic validatiors process inputs on your form.
 
-```json
+```json5
 {
     /* Input's Attributes*/
     "validation":{
@@ -21,7 +21,7 @@ The basic validatiors process inputs on your form.
 
 Validator that requires the iput have a non-empty value.
 
-```json
+```jsonc
 {
     /* Input's Attributes*/
     "validation":{
