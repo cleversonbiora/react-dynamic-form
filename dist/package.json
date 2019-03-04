@@ -1,6 +1,6 @@
 {
   "name": "react-json-page",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A simple and small lib to render html form based in json.",
   "main": "index.js",
   "scripts": {
