@@ -8,7 +8,7 @@ This is a React lib to generate pages and forms based in json files.
 
 * Redering HTML from JSON.
 * Dynamic Forms
-* [Basic Form Validation](/BasicValidation)
+* [Basic Form Validation](/react-json-page/BasicValidation)
 * Async Form Validation
 * Logical Input Hiddden
 * Async Form Post
