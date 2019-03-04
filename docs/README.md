@@ -17,7 +17,7 @@ In this exemple, we’ll build an simple form using only JSON.
 
 `index.js`
 
-```js
+```jsx
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { Reducers } from 'react-json-page';
@@ -37,7 +37,7 @@ ReactDOM.render(
 
 `App.js`
 
-```js
+```jsx
 //ADD IMPORT
 import {DynamicPage} from 'react-json-page'
 
