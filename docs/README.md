@@ -1,10 +1,7 @@
-# react-json-page
 
-This is a React lib to generate pages and forms based in json files.
+# Getting Started
 
-## Getting Started
-
-### Features
+## Features
 
 * Redering HTML from JSON.
 * Dynamic Forms
@@ -14,14 +11,13 @@ This is a React lib to generate pages and forms based in json files.
 * Async Form Post
 * Inject External Components and Functions
 
-### Code Example
+## Basic Example
 
 In this exemple, we’ll build an simple form using only JSON.
-Also, you can download the project and excute a more complete example using `npm start`.
 
 `index.js`
 
-``` JS
+```js
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { Reducers } from 'react-json-page';
@@ -41,7 +37,7 @@ ReactDOM.render(
 
 `App.js`
 
-``` JS
+```js
 //ADD IMPORT
 import {DynamicPage} from 'react-json-page'
 
@@ -51,7 +47,7 @@ import {DynamicPage} from 'react-json-page'
 
 `jsonForm.json`
 
-``` JSON
+```json
 {
     "id":"mainDiv",
     "type":"div",
@@ -117,7 +113,7 @@ import {DynamicPage} from 'react-json-page'
 }
 ```
 
-### Installing
+## Installing
 
 Run the following command:
 
