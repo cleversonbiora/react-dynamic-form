@@ -4,16 +4,16 @@
 ## Features
 
 * [Redering HTML from JSON](/react-json-page/RenderingHtml)
-* Dynamic Forms
+* [Dynamic Forms](/react-json-page/DynamicForms)
 * [Basic Form Validation](/react-json-page/BasicValidation)
-* Async Form Validation
-* Logical Input Hiddden
-* Async Form Post
-* Inject External Components and Functions
+* [Async And Custom Form Validation](/react-json-page/CustomValidation)
+* [Logical Input Hiddden](/react-json-page/InputHidden)
+* [Async Form Post](/react-json-page/AsyncPost)
+* [Inject External Components and Functions](/react-json-page/InjectedComponents)
 
 ## Basic Example
 
-In this exemple, we’ll build an simple form using only JSON.
+In this exemple, we’ll build a simple form using only JSON.
 
 `index.js`
 

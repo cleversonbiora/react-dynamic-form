@@ -6,13 +6,13 @@ This is a React lib to generate pages and forms based in json files.
 
 ### Features
 
-* Redering HTML from JSON.
-* Dynamic Forms
-* Basic Form Validation
-* Async Form Validation
-* Logical Input Hiddden
-* Async Form Post
-* Inject External Components and Functions
+* [Redering HTML from JSON](https://cleversonbiora.github.io/react-json-page/RenderingHtml)
+* [Dynamic Forms](https://cleversonbiora.github.io/react-json-page/DynamicForms)
+* [Basic Form Validation](https://cleversonbiora.github.io/react-json-page/BasicValidation)
+* [Async And Custom Form Validation](https://cleversonbiora.github.io/react-json-page/CustomValidation)
+* [Logical Input Hiddden](https://cleversonbiora.github.io/react-json-page/InputHidden)
+* [Async Form Post](https://cleversonbiora.github.io/react-json-page/AsyncPost)
+* [Inject External Components and Functions](https://cleversonbiora.github.io/react-json-page/InjectedComponents)
 
 ### Docs
 
