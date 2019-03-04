@@ -42,7 +42,7 @@ ReactDOM.render(
 import {DynamicPage} from 'react-json-page'
 
 //ADD COMPONENT
-<DynamicPage form={/*JSON Object*/} />;
+<DynamicPage form={/*JSON Object*/} />
 ```
 
 `jsonForm.json`
