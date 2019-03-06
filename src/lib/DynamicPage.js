@@ -20,10 +20,12 @@ class DynamicPage extends Component {
   render() {
     if(this.props.form && this.props.live)
       this.props.updateFormState(this.props.form);
+      /*Entry point... The json structure enters on the React structure from this point on.*/
     return(<SchemaField {...this.props.jsonForm}/>);
   }
 }
 const mapStateToProps = store => ({
+  /*Redux mapping to control the props*/
   jsonForm: store.dynamicFormState.formState
 });
 
