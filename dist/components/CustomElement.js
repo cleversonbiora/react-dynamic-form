@@ -23,9 +23,10 @@ class CustomElement extends Component {
             children,
             value,
             dispatch,
-            formId
+            formId,
+            voidElement
         } = _props,
-              inputProps = _objectWithoutProperties(_props, ["values", "components", "hidden", "type", "children", "value", "dispatch", "formId"]);
+              inputProps = _objectWithoutProperties(_props, ["values", "components", "hidden", "type", "children", "value", "dispatch", "formId", "voidElement"]);
         if (hidden && values) {
             if (execFunc(hidden, values)) return null;
         }
@@ -51,9 +52,15 @@ class CustomElement extends Component {
                     if (type) {
                         if (isUpperCase(`${type}`) && components[`${type}`]) {
                             const CustomTag = components[`${type}`];
-                            return React.createElement(
+                            debugger;
+                            if (voidElement) return React.createElement(
                                 CustomTag,
                                 _extends({ value: value }, inputProps),
+                                children ? children.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
+                            );else return React.createElement(
+                                CustomTag,
+                                inputProps,
+                                React.createElement(Value, { value: value }),
                                 children ? children.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
                             );
                         } else {
@@ -61,7 +68,6 @@ class CustomElement extends Component {
                             return React.createElement(
                                 CustomTag,
                                 inputProps,
-                                React.createElement(Value, { value: value }),
                                 children ? children.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
                             );
                         }

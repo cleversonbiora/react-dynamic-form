@@ -335,6 +335,7 @@
     },
     {  
         "id":"teste",
-        "type":"CustomDiv"
+        "type":"CustomDiv",
+        "voidElement":true
     }]
 }

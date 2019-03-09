@@ -16,10 +16,13 @@ class DynamicPage extends Component {
     if(this.props.customComponents)
       props.updateComponentState(this.props.customComponents);
   }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.form && this.props.form !== prevProps.form)
+      this.props.updateFormState(this.props.form);
+  }
   
   render() {
-    if(this.props.form && this.props.live)
-      this.props.updateFormState(this.props.form);
       /*Entry point... The json structure enters on the React structure from this point on.*/
     return(<SchemaField {...this.props.jsonForm}/>);
   }

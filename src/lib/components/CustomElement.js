@@ -19,6 +19,7 @@ class CustomElement extends Component {
             value,
             dispatch,
             formId,
+            voidElement,
             ...inputProps
         } = this.props;
         if(hidden && values){ 
@@ -51,17 +52,26 @@ class CustomElement extends Component {
                     if(type){
                         if(isUpperCase(`${type}`) && components[`${type}`]){
                             const CustomTag = components[`${type}`];
-                            return (
-                                <CustomTag value={value} {...inputProps}>
-                                    {children ? 
-                                    (children.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
-                                </CustomTag>
-                            );
+                            debugger
+                            if(voidElement)
+                                return (
+                                    <CustomTag value={value} {...inputProps}>
+                                        {children ? 
+                                        (children.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
+                                    </CustomTag>
+                                );
+                            else
+                                return (
+                                    <CustomTag {...inputProps}>
+                                        <Value value={value} />
+                                        {children ? 
+                                        (children.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
+                                    </CustomTag>
+                                );
                         }else{
                             const CustomTag = `${type}`;
                             return (
                                 <CustomTag {...inputProps}>
-                                    <Value value={value} />
                                     {children ? 
                                     (children.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
                                 </CustomTag>
