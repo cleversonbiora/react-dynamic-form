@@ -68,6 +68,7 @@ class CustomElement extends Component {
                             return React.createElement(
                                 CustomTag,
                                 inputProps,
+                                React.createElement(Value, { value: value }),
                                 children ? children.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
                             );
                         }

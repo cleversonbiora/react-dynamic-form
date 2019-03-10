@@ -72,6 +72,7 @@ class CustomElement extends Component {
                             const CustomTag = `${type}`;
                             return (
                                 <CustomTag {...inputProps}>
+                                    <Value value={value} />
                                     {children ? 
                                     (children.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
                                 </CustomTag>
