@@ -150,6 +150,12 @@ class BaseInput extends Component {
       
       let val = getFormValue(formId, inputProps.id, values);
       switch(inputProps.type){
+        case 'button':
+          return (
+            <button type="button" {...inputProps} >
+                {value}
+            </button>
+          );
         case 'select':
         case 'datalist':
         case 'textarea':
@@ -173,6 +179,8 @@ class BaseInput extends Component {
               </CustomInput>
           );
         default:
+          if(inputProps.type === "inputButton")
+              inputProps.type = "button"
           return (
             <input
               readOnly={readonly}

@@ -337,5 +337,17 @@
         "id":"teste",
         "type":"CustomDiv",
         "voidElement":true
+    },
+    {  
+        "id":"btnButton",
+        "type":"button",
+        "value":"Button",
+        "className": "btn btn-default"
+    },
+    {  
+        "id":"btnSubmit2",
+        "type":"inputButton",
+        "value":"Input",
+        "className": "btn btn-default"
     }]
 }
