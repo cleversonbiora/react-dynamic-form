@@ -1,5 +1,6 @@
 export function isControlledComponent(type) {
     switch (type) {
+        case 'inputButton':
         case 'button':
         case 'checkbox':
         case 'color':

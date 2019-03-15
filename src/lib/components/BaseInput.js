@@ -153,7 +153,9 @@ class BaseInput extends Component {
         case 'button':
           return (
             <button type="button" {...inputProps} >
-                {value}
+                <Value value={value} />
+                {children ? 
+                (children.map(control => <SchemaField formId={formId} key={control.id} {...control} />)) :(null)}
             </button>
           );
         case 'select':

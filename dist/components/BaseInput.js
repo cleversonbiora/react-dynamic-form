@@ -137,6 +137,13 @@ class BaseInput extends Component {
 
     let val = getFormValue(formId, inputProps.id, values);
     switch (inputProps.type) {
+      case 'button':
+        return React.createElement(
+          'button',
+          _extends({ type: 'button' }, inputProps),
+          React.createElement(Value, { value: value }),
+          children ? children.map(control => React.createElement(SchemaField, _extends({ formId: formId, key: control.id }, control))) : null
+        );
       case 'select':
       case 'datalist':
       case 'textarea':
@@ -168,6 +175,7 @@ class BaseInput extends Component {
           )
         );
       default:
+        if (inputProps.type === "inputButton") inputProps.type = "button";
         return React.createElement('input', _extends({
           readOnly: readonly,
           disabled: disabled,
