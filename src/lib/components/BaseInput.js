@@ -5,6 +5,8 @@ import { addFormValue, changeFormValue, addValidationValue, changeValidationValu
 import { execFunc } from "../helpers/functions";
 import { getValidation } from "../helpers/validators";
 import {getVariables,getFormValue} from '../helpers/values';
+import Value from './Value';
+import SchemaField from './SchemaField';
 
 class BaseInput extends Component {
     constructor(props) {
@@ -154,8 +156,8 @@ class BaseInput extends Component {
           return (
             <button type="button" {...inputProps} >
                 <Value value={value} />
-                {children ? 
-                (children.map(control => <SchemaField formId={formId} key={control.id} {...control} />)) :(null)}
+                {inputProps.children ? 
+                (inputProps.children.map(control => <SchemaField formId={formId} key={control.id} {...control} />)) :(null)}
             </button>
           );
         case 'select':
