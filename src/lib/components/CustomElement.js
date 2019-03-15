@@ -52,18 +52,8 @@ class CustomElement extends Component {
                     if(type){
                         if(isUpperCase(`${type}`) && components[`${type}`]){
                             const CustomTag = components[`${type}`];
-                            debugger
-                            if(voidElement)
                                 return (
                                     <CustomTag value={value} {...inputProps}>
-                                        {children ? 
-                                        (children.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
-                                    </CustomTag>
-                                );
-                            else
-                                return (
-                                    <CustomTag {...inputProps}>
-                                        <Value value={value} />
                                         {children ? 
                                         (children.map((control, i) => <SchemaField formId={formId} key={i} {...control} />)) :(null)}
                                     </CustomTag>

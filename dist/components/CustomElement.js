@@ -52,15 +52,9 @@ class CustomElement extends Component {
                     if (type) {
                         if (isUpperCase(`${type}`) && components[`${type}`]) {
                             const CustomTag = components[`${type}`];
-                            debugger;
-                            if (voidElement) return React.createElement(
+                            return React.createElement(
                                 CustomTag,
                                 _extends({ value: value }, inputProps),
-                                children ? children.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
-                            );else return React.createElement(
-                                CustomTag,
-                                inputProps,
-                                React.createElement(Value, { value: value }),
                                 children ? children.map((control, i) => React.createElement(SchemaField, _extends({ formId: formId, key: i }, control))) : null
                             );
                         } else {
