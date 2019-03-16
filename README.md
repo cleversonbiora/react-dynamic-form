@@ -39,6 +39,8 @@ Coming soon I wiil open for submitting pull requests to us.
 
 * **Cleverson Biora** - *Initial work* - [CleversonBiora](https://github.com/cleversonbiora)
 
+* **Rafael Wieler** - *Docs and Original Angular Lib Inspiration* - [RWieler](https://github.com/rwieler)
+
 See also the list of [contributors](https://github.com/cleversonbiora/react-json-page/contributors) who participated in this project.
 
 ## License
