@@ -10,8 +10,8 @@ export function isControlledComponent(type){
         case 'file':
         case 'hidden':
         case 'image':
-        case 'month ':
-        case 'number ':
+        case 'month':
+        case 'number':
         case 'password':
         case 'radio':
         case 'range':
